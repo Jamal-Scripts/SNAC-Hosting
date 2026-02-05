@@ -42,8 +42,6 @@
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
         @keyframes slideIn { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
         @keyframes scaleIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes checkmark { 0% { transform: scale(0); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
 
         .animate-on-scroll { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -58,7 +56,7 @@
         nav.scrolled { padding: 0.75rem 2rem; background: rgba(10, 14, 20, 0.95); }
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         
-        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--text-primary); }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--text-primary); cursor: pointer; }
         .logo-icon {
             width: 42px; height: 42px; background: var(--accent-primary); border-radius: 10px;
             display: flex; align-items: center; justify-content: center;
@@ -145,6 +143,111 @@
             display: none;
         }
         .cart-badge.visible { display: flex; }
+
+        /* LOCATION SELECTOR STYLES */
+        .location-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .location-option {
+            background: var(--bg-primary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            position: relative;
+        }
+        .location-option:hover {
+            border-color: rgba(0, 212, 170, 0.5);
+        }
+        .location-option.selected {
+            border-color: var(--accent-primary);
+            background: var(--accent-glow);
+        }
+        .location-flag {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .location-name {
+            font-weight: 600;
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+        .location-price {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .location-price.extra {
+            color: var(--accent-primary);
+        }
+        .coming-soon-text {
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: block;
+        }
+
+        /* TERMS PAGE STYLES */
+        #termsPage {
+            display: none;
+            padding: 8rem 2rem 4rem;
+            min-height: 100vh;
+            background: var(--bg-primary);
+        }
+        .terms-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .terms-header {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .terms-header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        .terms-header span {
+            color: var(--accent-primary);
+        }
+        .last-updated {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        .terms-content h2 {
+            color: var(--text-primary);
+            margin: 2rem 0 1rem;
+            font-size: 1.5rem;
+        }
+        .terms-content p, .terms-content ul {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .terms-content ul {
+            padding-left: 1.5rem;
+        }
+        .terms-content li {
+            margin-bottom: 0.5rem;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .back-link:hover { text-decoration: underline; }
 
         .hero {
             min-height: 100vh; display: flex; align-items: center;
@@ -263,10 +366,7 @@
         .footer-column a:hover { color: var(--accent-primary); }
         .footer-bottom { padding-top: 2rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
         .footer-bottom p { color: var(--text-muted); font-size: 0.9rem; }
-        .social-links { display: flex; gap: 1rem; }
-        .social-link { width: 40px; height: 40px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); text-decoration: none; transition: all 0.3s ease; font-size: 1.1rem; }
-        .social-link:hover { background: var(--accent-primary); color: var(--bg-primary); border-color: var(--accent-primary); transform: translateY(-3px); }
-
+        
         /* Modal Styles */
         .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 2rem; opacity: 0; visibility: hidden; transition: all 0.3s ease; overflow-y: auto; }
         .modal-overlay.active { opacity: 1; visibility: visible; }
@@ -396,70 +496,17 @@
             .cta-buttons { flex-direction: column; }
             .cta-buttons .btn { width: 100%; }
         }
-        /* 📜 TERMS PAGE STYLES */
-        #termsPage {
-            display: none; /* Hidden by default */
-            padding: 8rem 2rem 4rem;
-            min-height: 100vh;
-            background: var(--bg-primary);
-        }
-        .terms-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .terms-header {
-            margin-bottom: 3rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .terms-header h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-        .terms-header span {
-            color: var(--accent-primary);
-        }
-        .last-updated {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-        .terms-content h2 {
-            color: var(--text-primary);
-            margin: 2rem 0 1rem;
-            font-size: 1.5rem;
-        }
-        .terms-content p, .terms-content ul {
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-            line-height: 1.8;
-        }
-        .terms-content ul {
-            padding-left: 1.5rem;
-        }
-        .terms-content li {
-            margin-bottom: 0.5rem;
-        }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 2rem;
-            color: var(--accent-primary);
-            text-decoration: none;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .back-link:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
 
     <nav id="navbar">
         <div class="nav-container">
-            <a href="#" class="logo" onclick="showHomePage()"><div class="logo-icon">S</div><span class="logo-text">SNAC<span>-Hosting</span></span></a>
+            <a onclick="showHomePage()" class="logo"><div class="logo-icon">S</div><span class="logo-text">SNAC<span>-Hosting</span></span></a>
             <ul class="nav-links">
-                <li><a href="#features">Features</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#features" onclick="showHomePage()">Features</a></li>
+                <li><a href="#pricing" onclick="showHomePage()">Pricing</a></li>
+                <li><a href="#faq" onclick="showHomePage()">FAQ</a></li>
                 <li><a href="https://discord.gg/K8tcDCFe2P" target="_blank">Support</a></li>
             </ul>
             <div class="nav-buttons" id="navButtons"></div>
@@ -469,9 +516,9 @@
 
     <div class="mobile-menu" id="mobileMenu">
         <ul class="mobile-menu-links">
-            <li><a href="#features" onclick="toggleMobileMenu()">Features</a></li>
-            <li><a href="#pricing" onclick="toggleMobileMenu()">Pricing</a></li>
-            <li><a href="#faq" onclick="toggleMobileMenu()">FAQ</a></li>
+            <li><a href="#features" onclick="toggleMobileMenu();showHomePage()">Features</a></li>
+            <li><a href="#pricing" onclick="toggleMobileMenu();showHomePage()">Pricing</a></li>
+            <li><a href="#faq" onclick="toggleMobileMenu();showHomePage()">FAQ</a></li>
             <li><a href="https://discord.gg/K8tcDCFe2P" target="_blank" onclick="toggleMobileMenu()">Support</a></li>
         </ul>
         <div id="mobileAuthButtons" style="margin-top: 2rem;"></div>
@@ -500,7 +547,7 @@
                         <div class="form-group"><label>Name</label><input type="text" id="signUpName" class="form-input" placeholder="Your name" required></div>
                         <div class="form-group"><label>Email</label><input type="email" id="signUpEmail" class="form-input" placeholder="you@example.com" required></div>
                         <div class="form-group"><label>Password</label><div class="password-toggle"><input type="password" id="signUpPassword" class="form-input" placeholder="At least 6 characters" required><button type="button" class="password-toggle-btn" onclick="togglePassword('signUpPassword', this)">👁</button></div></div>
-                        <div class="form-group"><label class="form-checkbox"><input type="checkbox" required><span>I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a></span></label></div>
+                        <div class="form-group"><label class="form-checkbox"><input type="checkbox" required><span>I agree to the <a onclick="showTermsPage()" style="cursor:pointer; color:var(--accent-primary);">Terms of Service</a></span></label></div>
                         <button type="submit" class="btn btn-primary form-submit">Create Account</button>
                     </form>
                 </div>
@@ -523,37 +570,19 @@
                         </div>
 
                         <div class="checkout-section">
-                            <h3><span class="step-number">2</span> Account Information</h3>
+                            <h3><span class="step-number">2</span> Server Location</h3>
+                            <div id="locationSelector" class="location-grid">
+                                </div>
+                        </div>
+
+                        <div class="checkout-section">
+                            <h3><span class="step-number">3</span> Account Information</h3>
                             <div class="form-row">
                                 <div class="form-group"><label>First Name</label><input type="text" id="checkoutFirstName" class="form-input" placeholder="John" required></div>
                                 <div class="form-group"><label>Last Name</label><input type="text" id="checkoutLastName" class="form-input" placeholder="Doe" required></div>
                             </div>
                             <div class="form-group"><label>Email</label><input type="email" id="checkoutEmail" class="form-input" placeholder="you@example.com" required></div>
                             <div class="form-group"><label>Server Name (optional)</label><input type="text" id="checkoutServerName" class="form-input" placeholder="My Awesome Server"></div>
-                        </div>
-
-                        <div class="checkout-section">
-                            <h3><span class="step-number">3</span> Billing Address</h3>
-                            <div class="form-group"><label>Address</label><input type="text" id="checkoutAddress" class="form-input" placeholder="123 Main Street" required></div>
-                            <div class="form-row">
-                                <div class="form-group"><label>City</label><input type="text" id="checkoutCity" class="form-input" placeholder="New York" required></div>
-                                <div class="form-group"><label>ZIP Code</label><input type="text" id="checkoutZip" class="form-input" placeholder="10001" required></div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group"><label>Country</label>
-                                    <select id="checkoutCountry" class="form-input" required>
-                                        <option value="">Select Country</option>
-                                        <option value="US">United States</option>
-                                        <option value="CA">Canada</option>
-                                        <option value="UK">United Kingdom</option>
-                                        <option value="DE">Germany</option>
-                                        <option value="FR">France</option>
-                                        <option value="AU">Australia</option>
-                                        <option value="OTHER">Other</option>
-                                    </select>
-                                </div>
-                                <div class="form-group"><label>State/Province</label><input type="text" id="checkoutState" class="form-input" placeholder="NY"></div>
-                            </div>
                         </div>
 
                         <div class="checkout-section">
@@ -583,7 +612,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="form-checkbox"><input type="checkbox" id="checkoutTerms" required><span>I agree to the <a href="https://docs.google.com/document/d/your-terms-doc-id" target="_blank">Terms of Service</a></span></label>
+                            <label class="form-checkbox"><input type="checkbox" id="checkoutTerms" required><span>I agree to the <a onclick="showTermsPage()" style="cursor:pointer; color:var(--accent-primary);">Terms of Service</a></span></label>
                         </div>
 
                         <button type="button" class="btn btn-primary btn-large form-submit" onclick="processPayment()">Complete Order</button>
@@ -668,7 +697,8 @@
             </div>
         </section>
     </main>
-<section id="termsPage">
+
+    <section id="termsPage">
         <div class="terms-container">
             <a onclick="showHomePage()" class="back-link">← Back to Home</a>
             <div class="terms-header">
@@ -693,23 +723,40 @@
             </div>
         </div>
     </section>
+
     <footer>
         <div class="footer-container">
             <div class="footer-top">
                 <div class="footer-brand">
-                    <a href="#" class="logo"><div class="logo-icon">S</div><span class="logo-text">SNAC<span>-Hosting</span></span></a>
+                    <a onclick="showHomePage()" class="logo" style="cursor: pointer;"><div class="logo-icon">S</div><span class="logo-text">SNAC<span>-Hosting</span></span></a>
                     <p>Premium Minecraft server hosting with instant setup and unbeatable support.</p>
                 </div>
-                <div class="footer-column"><h4>Product</h4><ul><li><a href="#features">Features</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#">Locations</a></li><li><a href="#">Status</a></li></ul></div>
-                <div class="footer-column"><h4>Support</h4><ul><li><a href="https://discord.gg/K8tcDCFe2P" target="_blank">Help Center</a></li><li><a href="https://discord.gg/K8tcDCFe2P" target="_blank">Contact Us</a></li><li><a href="https://discord.gg/K8tcDCFe2P" target="_blank">Discord</a></li></ul></div>
-                <div class="footer-column"><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Terms</a></li><li><a href="#">Privacy</a></li><li><a href="#">Careers</a></li></ul></div>
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features" onclick="showHomePage()">Features</a></li>
+                        <li><a href="#pricing" onclick="showHomePage()">Pricing</a></li>
+                        <li><a href="#">Status</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="https://discord.gg/K8tcDCFe2P" target="_blank">Contact Us</a></li>
+                        <li><a href="https://discord.gg/K8tcDCFe2P" target="_blank">Discord</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a onclick="showTermsPage()" style="cursor: pointer;">Terms</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
             </div>
             <div class="footer-bottom">
                 <p>© 2026 SNAC-Hosting. All rights reserved.</p>
-                <div class="social-links">
-                    <a href="https://discord.gg/K8tcDCFe2P" target="_blank" class="social-link" title="Discord">💬</a>
-                    <a href="https://youtube.com" target="_blank" class="social-link" title="YouTube">▶️</a>
-                </div>
             </div>
         </div>
     </footer>
@@ -720,8 +767,21 @@
         // ============================================
 
         // 🟢 REAL-TIME COUNTER LOGIC
-        // We load the count from browser storage. If none exists, we start at 12 (Marketing trick).
-        let liveServerCount = parseInt(localStorage.getItem('snac_active_servers')) || 12;
+        // Starts at 15 and increments on purchase
+        let liveServerCount = parseInt(localStorage.getItem('snac_active_servers')) || 15;
+
+        // 🟢 LOCATION DATA (Based on your screenshots)
+        // Prices are approximations in USD based on the Euro screenshot
+        const LOCATIONS = [
+            { id: 'eu', name: 'Europe (No Preference)', flag: '🇪🇺', price: 0 },
+            { id: 'us', name: 'Manassas, USA', flag: '🇺🇸', price: 1.57 },
+            { id: 'at', name: 'Vienna, Austria', flag: '🇦🇹', price: 1.57 },
+            { id: 'sg', name: 'Singapore', flag: '🇸🇬', price: 13.20 },
+            { id: 'de', name: 'Nuremberg, Germany', flag: '🇩🇪', price: 1.57 }
+        ];
+
+        let selectedLocationPrice = 0;
+        let selectedLocationName = "Europe";
 
         const CONFIG = {
             siteName: "SNAC-Hosting",
@@ -729,7 +789,6 @@
             serverIP: "play.snac-hosting.com",
 
             stats: {
-                // We use the variable 'liveServerCount' here instead of a hardcoded string
                 servers: liveServerCount, 
                 uptime: "99.9",
                 support: "24/7"
@@ -820,8 +879,11 @@
             add(planId) {
                 const plan = CONFIG.plans.find(p => p.id === planId);
                 if (plan && !this.items.find(i => i.id === planId)) {
-                    this.items = [{ ...plan, quantity: 1, billingCycle: 'monthly' }]; // Only one item at a time
+                    this.items = [{ ...plan, quantity: 1, billingCycle: 'monthly' }]; 
                     this.save();
+                    // Reset location when adding new item
+                    selectedLocationPrice = 0;
+                    selectedLocationName = "Europe";
                     this.updateUI();
                 }
             },
@@ -851,7 +913,13 @@
                 let price = item.price;
                 if (item.billingCycle === 'quarterly') price = item.price * 3 * 0.9;
                 if (item.billingCycle === 'yearly') price = item.price * 12 * 0.8;
-                return price;
+                
+                // Add Location Price (Monthly * Months)
+                let multiplier = 1;
+                if (item.billingCycle === 'quarterly') multiplier = 3;
+                if (item.billingCycle === 'yearly') multiplier = 12;
+                
+                return price + (selectedLocationPrice * multiplier);
             },
             
             save() {
@@ -915,7 +983,6 @@
 
         function renderStats() {
             const s = CONFIG.stats;
-            // 🟢 UPDATED: This now reads the dynamic variable
             document.getElementById('heroStats').innerHTML = `
                 <div class="stat"><div class="stat-value" id="stat-servers">${liveServerCount}<span>+</span></div><div class="stat-label">Active Servers</div></div>
                 <div class="stat"><div class="stat-value">${s.uptime}<span>%</span></div><div class="stat-label">Uptime SLA</div></div>
@@ -992,12 +1059,57 @@
             }
             
             renderBillingCycle();
+            renderLocationSelector(); // 🟢 Render Locations
             renderOrderSummary();
             document.getElementById('checkoutModal').classList.add('active');
         }
 
         function closeCheckoutModal() {
             document.getElementById('checkoutModal').classList.remove('active');
+        }
+
+        // 🟢 DYNAMIC LOCATION SELECTOR
+        function renderLocationSelector() {
+            const item = Cart.items[0];
+            const container = document.getElementById('locationSelector');
+            container.innerHTML = ''; // Clear previous
+
+            // Logic: Only RS1000 and RS2000 get choices
+            if (item.id === 'rs1000' || item.id === 'rs2000') {
+                LOCATIONS.forEach(loc => {
+                    const el = document.createElement('div');
+                    el.className = `location-option ${selectedLocationName === loc.name ? 'selected' : ''}`;
+                    el.onclick = () => selectLocation(loc);
+                    
+                    const extra = loc.price > 0 ? `+$${loc.price.toFixed(2)}` : 'Included';
+                    
+                    el.innerHTML = `
+                        <span class="location-flag">${loc.flag}</span>
+                        <span class="location-name">${loc.id === 'eu' ? 'Europe' : loc.name.split(',')[0]}</span>
+                        <span class="location-price ${loc.price > 0 ? 'extra' : ''}">${extra}</span>
+                    `;
+                    container.appendChild(el);
+                });
+            } else {
+                // RS4000+ Logic (Locked)
+                selectedLocationPrice = 0;
+                selectedLocationName = "Europe (No Preference)";
+                container.innerHTML = `
+                    <div class="location-option selected" style="cursor: default; width: 100%;">
+                        <span class="location-flag">🇪🇺</span>
+                        <span class="location-name">No Preference Europe</span>
+                        <span class="location-price">Included</span>
+                        <span class="coming-soon-text">More locations coming soon...</span>
+                    </div>
+                `;
+            }
+        }
+
+        function selectLocation(loc) {
+            selectedLocationPrice = loc.price;
+            selectedLocationName = loc.name;
+            renderLocationSelector(); // Re-render to show selection
+            renderOrderSummary(); // Update total price
         }
 
         function renderBillingCycle() {
@@ -1047,7 +1159,14 @@
                         <h4>${item.name}</h4>
                         <p>${item.description}</p>
                     </div>
-                    <div class="order-item-price">$${total.toFixed(2)}</div>
+                    <div class="order-item-price">$${item.price.toFixed(2)}</div>
+                </div>
+                <div class="order-item">
+                    <div class="order-item-info">
+                        <h4>Location</h4>
+                        <p>${selectedLocationName}</p>
+                    </div>
+                    <div class="order-item-price">${selectedLocationPrice > 0 ? '+$' + selectedLocationPrice.toFixed(2) : '$0.00'}</div>
                 </div>
                 <div class="order-total">
                     <span>Total ${cycleText}</span>
@@ -1071,7 +1190,6 @@
             document.getElementById('paypalPaymentFields').style.display = method === 'paypal' ? 'block' : 'none';
         }
 
-        // 🟢 THIS IS THE IMPORTANT PAYMENT FUNCTION
         function processPayment() {
             const firstName = document.getElementById('checkoutFirstName').value;
             const lastName = document.getElementById('checkoutLastName').value;
@@ -1135,6 +1253,7 @@
                 <h4>Order Details</h4>
                 <div class="order-detail-row"><span>Order ID</span><span>${orderId}</span></div>
                 <div class="order-detail-row"><span>Plan</span><span>${item?.name || 'N/A'}</span></div>
+                <div class="order-detail-row"><span>Location</span><span>${selectedLocationName}</span></div>
                 <div class="order-detail-row"><span>Billing</span><span>${selectedBillingCycle.charAt(0).toUpperCase() + selectedBillingCycle.slice(1)}</span></div>
                 <div class="order-detail-row"><span>Total</span><span style="color: var(--accent-primary);">$${total.toFixed(2)}</span></div>
             `;
@@ -1207,6 +1326,21 @@
             const input = document.getElementById(id);
             input.type = input.type === 'password' ? 'text' : 'password';
             btn.textContent = input.type === 'password' ? '👁' : '🙈';
+        }
+
+        // 🔄 PAGE NAVIGATION LOGIC
+        function showTermsPage() {
+            closeCheckoutModal();
+            closeAuthModal();
+            document.getElementById('mainContent').style.display = 'none';
+            document.getElementById('termsPage').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function showHomePage() {
+            document.getElementById('mainContent').style.display = 'block';
+            document.getElementById('termsPage').style.display = 'none';
+            window.scrollTo(0, 0);
         }
 
         window.addEventListener('scroll', () => document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50));
