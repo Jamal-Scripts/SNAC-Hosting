@@ -1,1423 +1,1600 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <link rel="icon" type="image/png" href="image_dd1d7e.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SNAC-Hosting | Premium Minecraft Server Hosting</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-primary: #0a0e14;
-            --bg-secondary: #111820;
-            --bg-card: #151d28;
-            --bg-card-hover: #1a2433;
-            --accent-primary: #00d4aa;
-            --accent-secondary: #00b894;
-            --accent-glow: rgba(0, 212, 170, 0.15);
-            --text-primary: #f0f4f8;
-            --text-secondary: #8892a0;
-            --text-muted: #5a6572;
-            --border-color: #1e2a38;
-            --success: #00d4aa;
-            --error: #ff6b6b;
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a25;
+            --bg-glass: rgba(26, 26, 37, 0.7);
+            --accent-primary: #10b981;
+            --accent-secondary: #06b6d4;
+            --accent-gradient: linear-gradient(135deg, #10b981, #06b6d4);
+            --accent-teal: #14f4c9;
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
         body {
-            font-family: 'Outfit', sans-serif;
-            background-color: var(--bg-primary);
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
-            overflow-x: hidden;
+            overflow-x: hidden
         }
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-secondary); }
-        ::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: 4px; }
-
-        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-        @keyframes slideIn { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
-        @keyframes scaleIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes checkmark { 0% { transform: scale(0); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
-
-        .animate-on-scroll { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-        .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
-
-        nav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-            padding: 1rem 2rem; background: rgba(10, 14, 20, 0.85);
-            backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-color);
-            transition: all 0.3s ease;
+        a {
+            text-decoration: none;
+            color: inherit
         }
-        nav.scrolled { padding: 0.75rem 2rem; background: rgba(10, 14, 20, 0.95); }
-        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        
-        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--text-primary); cursor: pointer; }
-        .logo-icon {
-            width: 42px; height: 42px; background: var(--accent-primary); border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            font-weight: 800; font-size: 1.25rem; color: var(--bg-primary); transition: transform 0.3s ease;
-        }
-        .logo:hover .logo-icon { transform: rotate(10deg) scale(1.05); }
-        .logo-text { font-weight: 700; font-size: 1.5rem; letter-spacing: -0.5px; }
-        .logo-text span { color: var(--accent-primary); }
 
-        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.95rem; position: relative; transition: color 0.3s ease; }
-        .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--accent-primary); transition: width 0.3s ease; }
-        .nav-links a:hover { color: var(--text-primary); }
-        .nav-links a:hover::after { width: 100%; }
-        .nav-buttons { display: flex; gap: 1rem; align-items: center; }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px
+        }
 
         .btn {
-            padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; font-size: 0.95rem;
-            cursor: pointer; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            text-decoration: none; border: none; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-        }
-        .btn-ghost { background: transparent; color: var(--text-secondary); }
-        .btn-ghost:hover { color: var(--text-primary); background: var(--bg-card); }
-        .btn-primary { background: var(--accent-primary); color: var(--bg-primary); box-shadow: 0 4px 20px rgba(0, 212, 170, 0.3); }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 30px rgba(0, 212, 170, 0.4); }
-        .btn-secondary { background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-color); }
-        .btn-secondary:hover { background: var(--bg-card-hover); border-color: var(--accent-primary); }
-        .btn-large { padding: 1rem 2rem; font-size: 1.05rem; }
-
-        .mobile-menu-btn { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
-        .mobile-menu-btn span { display: block; width: 24px; height: 2px; background: var(--text-primary); margin: 6px 0; transition: all 0.3s ease; }
-
-        .user-menu { position: relative; }
-        .user-avatar {
-            width: 40px; height: 40px; background: var(--accent-primary); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-weight: 700; color: var(--bg-primary); cursor: pointer; transition: transform 0.2s ease;
-        }
-        .user-avatar:hover { transform: scale(1.05); }
-        .user-dropdown {
-            position: absolute; top: calc(100% + 10px); right: 0; background: var(--bg-card);
-            border: 1px solid var(--border-color); border-radius: 12px; padding: 0.5rem;
-            min-width: 200px; opacity: 0; visibility: hidden; transform: translateY(-10px);
-            transition: all 0.3s ease; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-        .user-menu:hover .user-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
-        .user-dropdown-header { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border-color); margin-bottom: 0.5rem; }
-        .user-dropdown-header strong { display: block; color: var(--text-primary); }
-        .user-dropdown-header span { font-size: 0.85rem; color: var(--text-muted); }
-        .user-dropdown a, .user-dropdown button {
-            display: block; width: 100%; padding: 0.75rem 1rem; color: var(--text-secondary);
-            text-decoration: none; border-radius: 8px; transition: all 0.2s ease;
-            background: none; border: none; text-align: left; font-size: 0.95rem; cursor: pointer; font-family: inherit;
-        }
-        .user-dropdown a:hover, .user-dropdown button:hover { background: var(--bg-card-hover); color: var(--text-primary); }
-        .user-dropdown .logout-btn { color: var(--error); }
-
-        /* Cart Icon */
-        .cart-icon {
-            position: relative;
-            width: 40px; height: 40px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-        }
-        .cart-icon:hover {
-            border-color: var(--accent-primary);
-            background: var(--bg-card-hover);
-        }
-        .cart-badge {
-            position: absolute;
-            top: -5px; right: -5px;
-            background: var(--accent-primary);
-            color: var(--bg-primary);
-            font-size: 0.7rem;
-            font-weight: 700;
-            width: 18px; height: 18px;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            display: none;
-        }
-        .cart-badge.visible { display: flex; }
-
-        /* LOCATION SELECTOR STYLES */
-        .location-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        .location-option {
-            background: var(--bg-primary);
-            border: 2px solid var(--border-color);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
             border-radius: 12px;
-            padding: 1rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: center;
-            position: relative;
-        }
-        .location-option:hover {
-            border-color: rgba(0, 212, 170, 0.5);
-        }
-        .location-option.selected {
-            border-color: var(--accent-primary);
-            background: var(--accent-glow);
-        }
-        .location-flag {
-            font-size: 2rem;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-        .location-name {
             font-weight: 600;
-            display: block;
-            font-size: 0.9rem;
-            margin-bottom: 0.25rem;
-        }
-        .location-price {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            font-family: 'JetBrains Mono', monospace;
-        }
-        .location-price.extra {
-            color: var(--accent-primary);
-        }
-        .coming-soon-text {
-            color: var(--text-muted);
-            font-style: italic;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            display: block;
+            cursor: pointer;
+            transition: all .3s;
+            border: none;
+            font-size: 14px
         }
 
-        /* TERMS PAGE STYLES */
-        #termsPage {
-            display: none;
-            padding: 8rem 2rem 4rem;
-            min-height: 100vh;
-            background: var(--bg-primary);
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4)
         }
-        .terms-container {
-            max-width: 800px;
-            margin: 0 auto;
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(139, 92, 246, 0.6)
         }
-        .terms-header {
-            margin-bottom: 3rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid var(--border-color);
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--accent-primary);
+            color: var(--accent-primary)
         }
-        .terms-header h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
+
+        .btn-secondary:hover {
+            background: var(--accent-primary);
+            color: #fff
         }
-        .terms-header span {
-            color: var(--accent-primary);
+
+        .glass {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color)
         }
-        .last-updated {
-            color: var(--text-muted);
-            font-size: 0.9rem;
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            transition: all .3s
         }
-        .terms-content h2 {
-            color: var(--text-primary);
-            margin: 2rem 0 1rem;
-            font-size: 1.5rem;
+
+        nav.scrolled {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color)
         }
-        .terms-content p, .terms-content ul {
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center
+        }
+
+        .nav-links a {
             color: var(--text-secondary);
-            margin-bottom: 1rem;
-            line-height: 1.8;
+            font-weight: 500;
+            transition: color .3s
         }
-        .terms-content ul {
-            padding-left: 1.5rem;
+
+        .nav-links a:hover {
+            color: var(--text-primary)
         }
-        .terms-content li {
-            margin-bottom: 0.5rem;
+
+        .nav-auth {
+            display: flex;
+            gap: 10px
         }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 2rem;
-            color: var(--accent-primary);
-            text-decoration: none;
-            font-weight: 600;
+
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
             cursor: pointer;
+            color: var(--text-primary)
         }
-        .back-link:hover { text-decoration: underline; }
+
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0
+        }
 
         .hero {
-            min-height: 100vh; display: flex; align-items: center;
-            padding: 8rem 2rem 4rem; position: relative; overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 100px 0
         }
-        .hero-bg { position: absolute; inset: 0; z-index: -1; }
-        .hero-bg::before {
-            content: ''; position: absolute; top: 0; right: 0; width: 60%; height: 100%;
-            background: var(--accent-glow); filter: blur(150px); opacity: 0.5;
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1
         }
-        .hero-grid {
-            position: absolute; inset: 0;
-            background-image: linear-gradient(rgba(0, 212, 170, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 212, 170, 0.03) 1px, transparent 1px);
-            background-size: 60px 60px;
-            mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.1
         }
-        .hero-container { max-width: 1400px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-        .hero-content { animation: slideIn 1s cubic-bezier(0.16, 1, 0.3, 1); }
-        
-        .hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -1px; }
-        .hero h1 span { color: var(--accent-primary); }
-        .hero-description { font-size: 1.15rem; color: var(--text-secondary); max-width: 500px; margin-bottom: 2rem; }
-        .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
-        .hero-stats { display: flex; gap: 3rem; }
-        .stat { text-align: left; }
-        .stat-value { font-size: 2rem; font-weight: 700; color: var(--text-primary); font-family: 'JetBrains Mono', monospace; }
-        .stat-value span { color: var(--accent-primary); }
-        .stat-label { font-size: 0.875rem; color: var(--text-muted); }
-        .hero-visual { position: relative; animation: scaleIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
-        .minecraft-scene { position: relative; width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; }
-        .floating-block { position: absolute; width: 80px; height: 80px; border-radius: 12px; animation: float 4s ease-in-out infinite; }
-        .block-1 { background: #8B4513; top: 10%; left: 20%; animation-delay: 0s; box-shadow: inset 0 -20px 0 rgba(0,0,0,0.2), 0 20px 40px rgba(0,0,0,0.3); }
-        .block-2 { background: #228B22; top: 5%; right: 25%; animation-delay: 0.5s; box-shadow: inset 0 -20px 0 rgba(0,0,0,0.2), 0 20px 40px rgba(0,0,0,0.3); }
-        .block-3 { background: #4a4a4a; bottom: 20%; left: 15%; animation-delay: 1s; box-shadow: inset 0 -20px 0 rgba(0,0,0,0.2), 0 20px 40px rgba(0,0,0,0.3); }
-        .block-4 { background: #1a1a1a; bottom: 15%; right: 20%; animation-delay: 1.5s; box-shadow: inset 0 -20px 0 rgba(0,0,0,0.2), 0 20px 40px rgba(0,0,0,0.3); }
-        .main-server-visual {
-            width: 280px; height: 280px; background: var(--bg-card); border: 2px solid var(--border-color);
-            border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            position: relative; box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+
+        .hero h1 span {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent
         }
-        
-        .server-status { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: rgba(0, 212, 170, 0.1); border-radius: 100px; font-size: 0.875rem; color: var(--accent-primary); font-weight: 500; }
-        .server-status .status-dot { width: 8px; height: 8px; background: var(--accent-primary); border-radius: 50%; animation: pulse 1.5s infinite; }
 
-        .features { padding: 6rem 2rem; background: var(--bg-secondary); position: relative; }
-        .features::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--border-color), transparent); }
-        .section-container { max-width: 1400px; margin: 0 auto; }
-        .section-header { text-align: center; max-width: 600px; margin: 0 auto 4rem; }
-        .section-tag { display: inline-block; padding: 0.375rem 1rem; background: var(--accent-glow); color: var(--accent-primary); border-radius: 100px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; }
-        .section-header h2 { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 700; margin-bottom: 1rem; letter-spacing: -0.5px; }
-        .section-header p { color: var(--text-secondary); font-size: 1.1rem; }
-        .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-        .feature-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 2rem; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); cursor: default; }
-        .feature-card:hover { transform: translateY(-8px); border-color: var(--accent-primary); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--accent-primary); }
-        .feature-icon { width: 56px; height: 56px; background: var(--accent-glow); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.25rem; transition: all 0.3s ease; }
-        .feature-card:hover .feature-icon { background: var(--accent-primary); transform: scale(1.1) rotate(5deg); }
-        .feature-card h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.75rem; }
-        .feature-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
-
-        .pricing { padding: 6rem 2rem; background: var(--bg-primary); }
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 1400px; margin: 0 auto; }
-        .pricing-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; padding: 2rem; position: relative; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); overflow: hidden; display: flex; flex-direction: column; }
-        .pricing-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--border-color); transition: background 0.3s ease; }
-        .pricing-card:hover { transform: translateY(-8px); border-color: rgba(0, 212, 170, 0.3); }
-        .pricing-card:hover::before { background: var(--accent-primary); }
-        .pricing-card.popular { border-color: var(--accent-primary); box-shadow: 0 0 60px rgba(0, 212, 170, 0.15); }
-        .pricing-card.popular::before { background: var(--accent-primary); }
-        .popular-badge { position: absolute; top: 1rem; right: 1rem; background: var(--accent-primary); color: var(--bg-primary); padding: 0.375rem 0.75rem; border-radius: 100px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-        .plan-name { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-primary); }
-        .plan-description { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.25rem; }
-        .plan-price { margin-bottom: 1.5rem; }
-        .price { font-size: 2.5rem; font-weight: 700; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary); }
-        .price-period { color: var(--text-muted); font-size: 0.9rem; }
-        .plan-features { list-style: none; margin-bottom: 1.5rem; flex-grow: 1; }
-        .plan-features li { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0; color: var(--text-secondary); font-size: 0.9rem; border-bottom: 1px solid var(--border-color); }
-        .plan-features li:last-child { border-bottom: none; }
-        .plan-features .check { width: 18px; height: 18px; background: var(--accent-glow); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent-primary); font-size: 0.7rem; flex-shrink: 0; }
-        .pricing-card .btn { width: 100%; }
-
-        .faq { padding: 6rem 2rem; background: var(--bg-primary); }
-        .faq-grid { max-width: 800px; margin: 0 auto; }
-        .faq-item { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 1rem; overflow: hidden; transition: all 0.3s ease; }
-        .faq-item:hover { border-color: rgba(0, 212, 170, 0.3); }
-        .faq-question { width: 100%; background: none; border: none; padding: 1.5rem; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--text-primary); font-size: 1.05rem; font-weight: 500; font-family: 'Outfit', sans-serif; transition: color 0.3s ease; }
-        .faq-question:hover { color: var(--accent-primary); }
-        .faq-icon { width: 24px; height: 24px; position: relative; flex-shrink: 0; }
-        .faq-icon::before, .faq-icon::after { content: ''; position: absolute; background: var(--accent-primary); transition: all 0.3s ease; }
-        .faq-icon::before { width: 14px; height: 2px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-        .faq-icon::after { width: 2px; height: 14px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-        .faq-item.active .faq-icon::after { transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-        .faq-answer-content { padding: 0 1.5rem 1.5rem; color: var(--text-secondary); line-height: 1.7; }
-        .faq-item.active .faq-answer { max-height: 300px; }
-
-        .cta { padding: 6rem 2rem; background: var(--bg-secondary); text-align: center; position: relative; overflow: hidden; }
-        .cta::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px; background: var(--accent-glow); filter: blur(100px); opacity: 0.3; pointer-events: none; }
-        .cta-content { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
-        .cta h2 { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 700; margin-bottom: 1rem; }
-        .cta p { color: var(--text-secondary); font-size: 1.15rem; margin-bottom: 2rem; }
-        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-
-        footer { padding: 4rem 2rem 2rem; background: var(--bg-primary); border-top: 1px solid var(--border-color); }
-        .footer-container { max-width: 1400px; margin: 0 auto; }
-        .footer-top { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 3rem; margin-bottom: 3rem; }
-        .footer-brand p { color: var(--text-secondary); margin-top: 1rem; max-width: 300px; font-size: 0.95rem; }
-        .footer-column h4 { font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 1.25rem; }
-        .footer-column ul { list-style: none; }
-        .footer-column li { margin-bottom: 0.75rem; }
-        .footer-column a { color: var(--text-secondary); text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem; }
-        .footer-column a:hover { color: var(--accent-primary); }
-        .footer-bottom { padding-top: 2rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-        .footer-bottom p { color: var(--text-muted); font-size: 0.9rem; }
-        
-        /* Modal Styles */
-        .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 2rem; opacity: 0; visibility: hidden; transition: all 0.3s ease; overflow-y: auto; }
-        .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; width: 100%; max-width: 440px; transform: scale(0.9) translateY(20px); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); overflow: hidden; position: relative; margin: auto; }
-        .modal-overlay.active .modal { transform: scale(1) translateY(0); }
-        .modal.checkout-modal { max-width: 900px; }
-        .modal-header { padding: 2rem 2rem 0; text-align: center; }
-        .modal-header h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .modal-header p { color: var(--text-secondary); }
-        .modal-close { position: absolute; top: 1rem; right: 1rem; width: 36px; height: 36px; background: var(--bg-card-hover); border: none; border-radius: 50%; color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; transition: all 0.2s ease; z-index: 10; }
-        .modal-close:hover { background: var(--border-color); color: var(--text-primary); }
-        .modal-body { padding: 2rem; position: relative; }
-        .form-group { margin-bottom: 1.5rem; }
-        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--text-secondary); font-size: 0.9rem; }
-        .form-input { width: 100%; padding: 0.875rem 1rem; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 10px; color: var(--text-primary); font-size: 1rem; font-family: inherit; transition: all 0.3s ease; }
-        .form-input:focus { outline: none; border-color: var(--accent-primary); box-shadow: 0 0 0 3px var(--accent-glow); }
-        .form-input.error { border-color: var(--error); animation: shake 0.4s ease; }
-        .form-input::placeholder { color: var(--text-muted); }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        .form-checkbox { display: flex; align-items: center; gap: 0.75rem; cursor: pointer; }
-        .form-checkbox input { width: 18px; height: 18px; accent-color: var(--accent-primary); cursor: pointer; }
-        .form-checkbox span { color: var(--text-secondary); font-size: 0.9rem; }
-        .form-checkbox a { color: var(--accent-primary); text-decoration: none; }
-        .form-submit { width: 100%; padding: 1rem; margin-top: 0.5rem; }
-        .modal-footer { padding: 0 2rem 2rem; text-align: center; color: var(--text-secondary); font-size: 0.95rem; }
-        .modal-footer a { color: var(--accent-primary); text-decoration: none; font-weight: 500; cursor: pointer; }
-        .alert { padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem; font-size: 0.9rem; display: none; }
-        .alert.success { background: rgba(0, 212, 170, 0.1); border: 1px solid var(--accent-primary); color: var(--accent-primary); }
-        .alert.error { background: rgba(255, 107, 107, 0.1); border: 1px solid var(--error); color: var(--error); }
-        .alert.visible { display: block; animation: slideDown 0.3s ease; }
-        .password-toggle { position: relative; }
-        .password-toggle .form-input { padding-right: 3rem; }
-        .password-toggle-btn { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 0.25rem; transition: color 0.2s ease; }
-        .password-toggle-btn:hover { color: var(--text-primary); }
-
-        /* Checkout Styles */
-        .checkout-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; }
-        .checkout-section { margin-bottom: 2rem; }
-        .checkout-section h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; gap: 0.5rem; }
-        .checkout-section h3 .step-number { width: 24px; height: 24px; background: var(--accent-primary); color: var(--bg-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; }
-
-        .order-summary { background: var(--bg-secondary); border-radius: 16px; padding: 1.5rem; position: sticky; top: 2rem; }
-        .order-summary h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 1.25rem; }
-        .order-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 1rem 0; border-bottom: 1px solid var(--border-color); }
-        .order-item:last-of-type { border-bottom: none; }
-        .order-item-info h4 { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
-        .order-item-info p { color: var(--text-muted); font-size: 0.85rem; }
-        .order-item-price { font-family: 'JetBrains Mono', monospace; font-weight: 600; color: var(--accent-primary); }
-        .order-total { display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; margin-top: 1rem; border-top: 2px solid var(--border-color); }
-        .order-total span { font-weight: 600; }
-        .order-total .total-price { font-size: 1.5rem; font-family: 'JetBrains Mono', monospace; color: var(--accent-primary); }
-        .order-features { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); }
-        .order-features h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--text-muted); }
-        .order-features ul { list-style: none; }
-        .order-features li { display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0; color: var(--text-secondary); font-size: 0.85rem; }
-        .order-features li::before { content: '✓'; color: var(--accent-primary); font-weight: bold; }
-
-        .billing-cycle { display: flex; gap: 0.75rem; margin-bottom: 1.5rem; }
-        .billing-option { flex: 1; padding: 1rem; background: var(--bg-primary); border: 2px solid var(--border-color); border-radius: 12px; cursor: pointer; transition: all 0.3s ease; text-align: center; }
-        .billing-option:hover { border-color: rgba(0, 212, 170, 0.5); }
-        .billing-option.selected { border-color: var(--accent-primary); background: var(--accent-glow); }
-        .billing-option .billing-period { font-weight: 600; display: block; margin-bottom: 0.25rem; }
-        .billing-option .billing-price { color: var(--accent-primary); font-family: 'JetBrains Mono', monospace; font-weight: 600; }
-        .billing-option .billing-save { display: block; font-size: 0.75rem; color: var(--success); margin-top: 0.25rem; }
-
-        .payment-methods { display: flex; gap: 0.75rem; margin-bottom: 1.5rem; }
-        .payment-method { flex: 1; padding: 1rem; background: var(--bg-primary); border: 2px solid var(--border-color); border-radius: 12px; cursor: pointer; transition: all 0.3s ease; text-align: center; font-weight: 500; }
-        .payment-method:hover { border-color: rgba(0, 212, 170, 0.5); }
-        .payment-method.selected { border-color: var(--accent-primary); background: var(--accent-glow); }
-        .payment-method .payment-icon { font-size: 1.5rem; display: block; margin-bottom: 0.25rem; }
-
-        .card-input-group { position: relative; }
-        .card-icons { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); display: flex; gap: 0.25rem; font-size: 1.25rem; }
-
-        .secure-badge { display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.75rem; background: rgba(0, 212, 170, 0.1); border-radius: 8px; margin-top: 1rem; font-size: 0.85rem; color: var(--accent-primary); }
-
-        /* Success Modal */
-        .success-content { text-align: center; padding: 2rem; }
-        .success-icon { width: 80px; height: 80px; background: var(--accent-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2.5rem; animation: checkmark 0.5s ease; }
-        .success-content h2 { font-size: 1.75rem; margin-bottom: 0.5rem; }
-        .success-content p { color: var(--text-secondary); margin-bottom: 1.5rem; }
-        .order-details { background: var(--bg-secondary); border-radius: 12px; padding: 1.5rem; text-align: left; margin-bottom: 1.5rem; }
-        .order-details h4 { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem; }
-        .order-detail-row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color); }
-        .order-detail-row:last-child { border-bottom: none; }
-        .order-detail-row span:first-child { color: var(--text-secondary); }
-        .order-detail-row span:last-child { font-weight: 600; }
-
-        .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg-primary); z-index: 999; padding: 6rem 2rem 2rem; transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-        .mobile-menu.active { transform: translateX(0); }
-        .mobile-menu-links { list-style: none; }
-        .mobile-menu-links li { margin-bottom: 1.5rem; }
-        .mobile-menu-links a { color: var(--text-primary); text-decoration: none; font-size: 1.5rem; font-weight: 600; }
-
-        @media (max-width: 1200px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 992px) {
-            .hero-container { grid-template-columns: 1fr; text-align: center; }
-            .hero-description { margin-left: auto; margin-right: auto; }
-            .hero-cta { justify-content: center; }
-            .hero-stats { justify-content: center; }
-            .hero-visual { order: -1; }
-            .minecraft-scene { max-width: 400px; margin: 0 auto; }
-            .footer-top { grid-template-columns: repeat(2, 1fr); }
-            .footer-brand { grid-column: span 2; }
-            .checkout-grid { grid-template-columns: 1fr; }
-            .order-summary { position: static; }
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto
         }
-        @media (max-width: 768px) {
-            .nav-links, .nav-buttons { display: none; }
-            .mobile-menu-btn { display: block; }
-            .mobile-menu { display: block; }
-            .features-grid { grid-template-columns: 1fr; }
-            .pricing-grid { grid-template-columns: 1fr; }
-            .footer-top { grid-template-columns: 1fr; }
-            .footer-brand { grid-column: span 1; }
-            .footer-bottom { flex-direction: column; text-align: center; }
-            .floating-block { width: 50px; height: 50px; }
-            .main-server-visual { width: 220px; height: 220px; }
-            .server-icon { width: 70px; height: 70px; }
-            .server-icon::before { font-size: 2rem; }
-            .form-row { grid-template-columns: 1fr; }
-            .billing-cycle { flex-direction: column; }
-            .payment-methods { flex-direction: column; }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap
         }
-        @media (max-width: 480px) {
-            .hero-stats { flex-direction: column; gap: 1.5rem; }
-            .cta-buttons { flex-direction: column; }
-            .cta-buttons .btn { width: 100%; }
+
+        .hero-stats {
+            display: flex;
+            gap: 50px;
+            justify-content: center;
+            margin-top: 60px
+        }
+
+        .stat {
+            text-align: center
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 14px
+        }
+
+        section {
+            padding: 100px 0;
+            position: relative;
+            z-index: 1
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px
+        }
+
+        .feature-card {
+            padding: 30px;
+            border-radius: 20px;
+            transition: all .3s
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-primary)
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            background: var(--accent-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 20px
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 14px
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto
+        }
+
+        @media(max-width: 1200px) {
+            .pricing-grid {
+                grid-template-columns: repeat(3, 1fr)
+            }
+        }
+
+        @media(max-width: 900px) {
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        @media(max-width: 600px) {
+            .pricing-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .pricing-card {
+            padding: 30px 25px;
+            border-radius: 20px;
+            position: relative;
+            transition: all .3s;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color)
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--accent-primary)
+        }
+
+        .pricing-card.popular::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap
+        }
+
+        .pricing-card.ultimate {
+            border: 1px solid var(--accent-primary)
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15)
+        }
+
+        .pricing-header h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: var(--accent-primary)
+        }
+
+        .plan-subtitle {
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin-bottom: 15px
+        }
+
+        .pricing-header .price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 10px 0;
+            color: var(--accent-teal)
+        }
+
+        .pricing-header .price span {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 400
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 20px 0;
+            padding: 0
+        }
+
+        .pricing-features li {
+            padding: 8px 0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px
+        }
+
+        .pricing-features li i {
+            color: var(--accent-primary);
+            font-size: 12px
+        }
+
+        .pricing-card .btn {
+            width: 100%;
+            margin-top: 10px
+        }
+
+        .pricing-card .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--border-color);
+            color: var(--text-primary)
+        }
+
+        .pricing-card .btn-secondary:hover {
+            border-color: var(--accent-primary);
+            background: var(--accent-primary);
+            color: var(--bg-primary)
+        }
+
+        .pricing-card .btn-primary {
+            background: var(--accent-primary);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3)
+        }
+
+        .pricing-card .btn-primary:hover {
+            box-shadow: 0 6px 25px rgba(16, 185, 129, 0.5)
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+            border-radius: 15px;
+            overflow: hidden
+        }
+
+        .faq-question {
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600
+        }
+
+        .faq-question i {
+            transition: transform .3s
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg)
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .3s;
+            padding: 0 25px
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding: 0 25px 20px
+        }
+
+        .faq-answer p {
+            color: var(--text-secondary)
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 80px 40px;
+            border-radius: 30px;
+            margin: 0 20px
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px
+        }
+
+        .cta-section p {
+            color: var(--text-secondary);
+            margin-bottom: 30px
+        }
+
+        .cta-btns {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap
+        }
+
+        footer {
+            padding: 60px 0 30px;
+            border-top: 1px solid var(--border-color)
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px
+        }
+
+        .footer-brand p {
+            color: var(--text-secondary);
+            margin-top: 15px;
+            font-size: 14px
+        }
+
+        .footer-links h4 {
+            margin-bottom: 20px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px
+        }
+
+        .footer-links a {
+            display: block;
+            color: var(--text-secondary);
+            padding: 8px 0;
+            font-size: 14px;
+            transition: color .3s
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-primary)
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 14px
+        }
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px
+        }
+
+        .modal-overlay.active {
+            display: flex
+        }
+
+        .modal {
+            background: var(--bg-card);
+            border-radius: 25px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalIn .3s
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9)
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1)
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 24px;
+            cursor: pointer
+        }
+
+        .modal-header {
+            padding: 30px 30px 0;
+            text-align: center
+        }
+
+        .modal-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px
+        }
+
+        .modal-header p {
+            color: var(--text-secondary)
+        }
+
+        .modal-body {
+            padding: 30px
+        }
+
+        .form-group {
+            margin-bottom: 20px
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: 14px;
+            transition: border-color .3s
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-primary)
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-secondary);
+            font-size: 14px
+        }
+
+        .form-footer a {
+            color: var(--accent-primary)
+        }
+
+        .checkout-modal {
+            max-width: 900px
+        }
+
+        .checkout-content {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px
+        }
+
+        .checkout-steps {
+            padding: 30px
+        }
+
+        .checkout-step {
+            display: none
+        }
+
+        .checkout-step.active {
+            display: block
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700
+        }
+
+        .step-header h3 {
+            font-size: 1.3rem
+        }
+
+        .checkout-sidebar {
+            background: var(--bg-secondary);
+            padding: 30px;
+            border-radius: 20px
+        }
+
+        .order-summary h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color)
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 15px;
+            font-size: 1.3rem;
+            font-weight: 700
+        }
+
+        .checkout-nav {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px
+        }
+
+        .checkout-nav .btn {
+            flex: 1
+        }
+
+        .location-grid,
+        .cycle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px
+        }
+
+        .location-option,
+        .cycle-option {
+            padding: 15px;
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            text-align: center;
+            transition: all .3s
+        }
+
+        .location-option:hover,
+        .cycle-option:hover,
+        .location-option.selected,
+        .cycle-option.selected {
+            border-color: var(--accent-primary);
+            background: rgba(139, 92, 246, 0.1)
+        }
+
+        .location-option i,
+        .cycle-option i {
+            font-size: 24px;
+            margin-bottom: 8px;
+            display: block
+        }
+
+        .location-option.disabled {
+            opacity: 0.4;
+            pointer-events: none;
+            cursor: not-allowed
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            transition: all .3s
+        }
+
+        .payment-option:hover,
+        .payment-option.selected {
+            border-color: var(--accent-primary);
+            background: rgba(16, 185, 129, 0.1)
+        }
+
+        .payment-option i {
+            font-size: 22px;
+            color: var(--accent-primary)
+        }
+
+        .payment-option span {
+            font-size: 13px;
+            font-weight: 500
+        }
+
+        .payment-form {
+            margin-top: 20px;
+            animation: fadeIn .3s
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .crypto-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap
+        }
+
+        .crypto-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 18px;
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            transition: all .3s
+        }
+
+        .crypto-option:hover,
+        .crypto-option.selected {
+            border-color: var(--accent-primary);
+            background: rgba(16, 185, 129, 0.1)
+        }
+
+        .crypto-option i {
+            font-size: 20px;
+            color: #f7931a
+        }
+
+        .crypto-option .fa-ethereum {
+            color: #627eea
+        }
+
+        .wizard-modal {
+            max-width: 700px
+        }
+
+        .wizard-progress {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--border-color)
+        }
+
+        .wizard-step {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--border-color);
+            transition: all .3s
+        }
+
+        .wizard-step.active,
+        .wizard-step.completed {
+            background: var(--accent-primary)
+        }
+
+        .wizard-content {
+            padding: 30px
+        }
+
+        .wizard-page {
+            display: none
+        }
+
+        .wizard-page.active {
+            display: block
+        }
+
+        .server-type-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px
+        }
+
+        .server-type {
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            text-align: center;
+            transition: all .3s
+        }
+
+        .server-type:hover,
+        .server-type.selected {
+            border-color: var(--accent-primary);
+            background: rgba(139, 92, 246, 0.1)
+        }
+
+        .server-type i {
+            font-size: 30px;
+            margin-bottom: 10px;
+            color: var(--accent-primary)
+        }
+
+        .server-type h4 {
+            font-size: 14px
+        }
+
+        .wizard-nav {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px
+        }
+
+        .wizard-nav .btn {
+            flex: 1
+        }
+
+        .panel-container {
+            display: none;
+            min-height: 100vh;
+            padding-top: 80px
+        }
+
+        .panel-container.active {
+            display: block
+        }
+
+        .panel-sidebar {
+            position: fixed;
+            left: 0;
+            top: 80px;
+            bottom: 0;
+            width: 250px;
+            background: var(--bg-card);
+            border-right: 1px solid var(--border-color);
+            padding: 20px
+        }
+
+        .panel-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            border-radius: 10px;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+            transition: all .3s
+        }
+
+        .panel-nav a:hover,
+        .panel-nav a.active {
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--accent-primary)
+        }
+
+        .panel-nav a i {
+            width: 20px
+        }
+
+        .panel-main {
+            margin-left: 250px;
+            padding: 30px
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px
+        }
+
+        .panel-header h1 {
+            font-size: 1.8rem
+        }
+
+        .server-controls {
+            display: flex;
+            gap: 10px
+        }
+
+        .server-controls .btn {
+            padding: 10px 20px
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600
+        }
+
+        .status-badge.online {
+            background: rgba(34, 197, 94, 0.2);
+            color: var(--success)
+        }
+
+        .status-badge.offline {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger)
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px
+        }
+
+        .stat-card {
+            padding: 25px;
+            border-radius: 15px
+        }
+
+        .stat-card h4 {
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin-bottom: 10px
+        }
+
+        .stat-card .value {
+            font-size: 1.8rem;
+            font-weight: 700
+        }
+
+        .stat-card .bar {
+            height: 8px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            margin-top: 15px;
+            overflow: hidden
+        }
+
+        .stat-card .bar-fill {
+            height: 100%;
+            background: var(--accent-gradient);
+            border-radius: 10px;
+            transition: width .5s
+        }
+
+        .panel-grid {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 20px
+        }
+
+        .console-card {
+            border-radius: 15px;
+            overflow: hidden
+        }
+
+        .console-header {
+            padding: 15px 20px;
+            background: var(--bg-secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .console-output {
+            height: 300px;
+            padding: 15px;
+            font-family: monospace;
+            font-size: 13px;
+            overflow-y: auto;
+            background: #0d0d12
+        }
+
+        .console-output .log {
+            padding: 3px 0
+        }
+
+        .console-output .log.info {
+            color: #60a5fa
+        }
+
+        .console-output .log.warn {
+            color: #fbbf24
+        }
+
+        .console-output .log.error {
+            color: #f87171
+        }
+
+        .console-input {
+            display: flex;
+            border-top: 1px solid var(--border-color)
+        }
+
+        .console-input input {
+            flex: 1;
+            padding: 12px 15px;
+            background: var(--bg-secondary);
+            border: none;
+            color: var(--text-primary);
+            font-family: monospace
+        }
+
+        .console-input button {
+            padding: 12px 20px;
+            background: var(--accent-primary);
+            border: none;
+            color: #fff;
+            cursor: pointer
+        }
+
+        .players-card {
+            border-radius: 15px;
+            padding: 20px
+        }
+
+        .players-card h3 {
+            margin-bottom: 15px
+        }
+
+        .player-list {
+            max-height: 250px;
+            overflow-y: auto
+        }
+
+        .player-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            background: var(--bg-secondary)
+        }
+
+        .player-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            background: var(--accent-gradient)
+        }
+
+        .player-info h4 {
+            font-size: 14px
+        }
+
+        .player-info span {
+            font-size: 12px;
+            color: var(--text-secondary)
+        }
+
+        .file-manager {
+            border-radius: 15px;
+            padding: 20px
+        }
+
+        .file-toolbar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px
+        }
+
+        .file-toolbar .btn {
+            padding: 8px 15px;
+            font-size: 13px
+        }
+
+        .file-list {
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: background .2s
+        }
+
+        .file-item:hover {
+            background: var(--bg-secondary)
+        }
+
+        .file-item:last-child {
+            border-bottom: none
+        }
+
+        .file-item i {
+            color: var(--accent-primary)
+        }
+
+        .file-item .name {
+            flex: 1
+        }
+
+        .file-item .size {
+            color: var(--text-secondary);
+            font-size: 13px
+        }
+
+        .hidden {
+            display: none !important
+        }
+
+        @media(max-width:768px) {
+
+            .nav-links,
+            .nav-auth {
+                display: none
+            }
+
+            .mobile-menu {
+                display: block
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .panel-sidebar {
+                display: none
+            }
+
+            .panel-main {
+                margin-left: 0
+            }
+
+            .checkout-content {
+                grid-template-columns: 1fr
+            }
+
+            .server-type-grid {
+                grid-template-columns: 1fr 1fr
+            }
         }
     </style>
 </head>
-<body>
 
+<body>
+    <canvas id="particles"></canvas>
     <nav id="navbar">
-        <div class="nav-container">
-            <a onclick="showHomePage()" class="logo" style="cursor: pointer;"><div class="logo-icon">S</div><span class="logo-text">SNAC<span>-Hosting</span></span></a>
-            <ul class="nav-links">
-                <li><a href="#features" onclick="showHomePage()">Features</a></li>
-                <li><a href="#pricing" onclick="showHomePage()">Pricing</a></li>
-                <li><a href="#faq" onclick="showHomePage()">FAQ</a></li>
-                <li><a href="https://discord.gg/K8tcDCFe2P" target="_blank">Support</a></li>
-            </ul>
-            <div class="nav-buttons" id="navButtons"></div>
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+        <div class="container"><a href="#" class="logo">SNAC-Hosting</a>
+            <div class="nav-links"><a href="#features">Features</a><a href="#pricing">Pricing</a><a
+                    href="#faq">FAQ</a><a href="https://discord.gg/K8tcDCFe2P" target="_blank">Support</a></div>
+            <div class="nav-auth" id="navAuth"><button class="btn btn-secondary"
+                    onclick="openModal('loginModal')">Login</button><button class="btn btn-primary"
+                    onclick="openModal('registerModal')">Sign Up</button></div>
+            <div class="mobile-menu" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
         </div>
     </nav>
 
-    <div class="mobile-menu" id="mobileMenu">
-        <ul class="mobile-menu-links">
-            <li><a href="#features" onclick="toggleMobileMenu();showHomePage()">Features</a></li>
-            <li><a href="#pricing" onclick="toggleMobileMenu();showHomePage()">Pricing</a></li>
-            <li><a href="#faq" onclick="toggleMobileMenu();showHomePage()">FAQ</a></li>
-            <li><a href="https://discord.gg/K8tcDCFe2P" target="_blank" onclick="toggleMobileMenu()">Support</a></li>
-        </ul>
-        <div id="mobileAuthButtons" style="margin-top: 2rem;"></div>
-    </div>
-
-    <div class="modal-overlay" id="authModal">
-        <div class="modal">
-            <button class="modal-close" onclick="closeAuthModal()">×</button>
-            <div id="signInForm">
-                <div class="modal-header"><h2>Welcome Back</h2><p>Sign in to your account</p></div>
-                <div class="modal-body">
-                    <div class="alert" id="signInAlert"></div>
-                    <form onsubmit="handleSignIn(event)">
-                        <div class="form-group"><label>Email</label><input type="email" id="signInEmail" class="form-input" placeholder="you@example.com" required></div>
-                        <div class="form-group"><label>Password</label><div class="password-toggle"><input type="password" id="signInPassword" class="form-input" placeholder="••••••••" required><button type="button" class="password-toggle-btn" onclick="togglePassword('signInPassword', this)">👁</button></div></div>
-                        <button type="submit" class="btn btn-primary form-submit">Sign In</button>
-                    </form>
-                </div>
-                <div class="modal-footer">Don't have an account? <a onclick="showSignUp()">Sign up</a></div>
-            </div>
-            <div id="signUpForm" style="display: none;">
-                <div class="modal-header"><h2>Create Account</h2><p>Start hosting your Minecraft server</p></div>
-                <div class="modal-body">
-                    <div class="alert" id="signUpAlert"></div>
-                    <form onsubmit="handleSignUp(event)">
-                        <div class="form-group"><label>Name</label><input type="text" id="signUpName" class="form-input" placeholder="Your name" required></div>
-                        <div class="form-group"><label>Email</label><input type="email" id="signUpEmail" class="form-input" placeholder="you@example.com" required></div>
-                        <div class="form-group"><label>Password</label><div class="password-toggle"><input type="password" id="signUpPassword" class="form-input" placeholder="At least 6 characters" required><button type="button" class="password-toggle-btn" onclick="togglePassword('signUpPassword', this)">👁</button></div></div>
-                        <div class="form-group"><label class="form-checkbox"><input type="checkbox" required><span>I agree to the <a onclick="showTermsPage()" style="cursor:pointer; color:var(--accent-primary);">Terms of Service</a></span></label></div>
-                        <button type="submit" class="btn btn-primary form-submit">Create Account</button>
-                    </form>
-                </div>
-                <div class="modal-footer">Already have an account? <a onclick="showSignIn()">Sign in</a></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="checkoutModal">
-        <div class="modal checkout-modal">
-            <button class="modal-close" onclick="closeCheckoutModal()">×</button>
-            <div class="modal-header"><h2>🛒 Checkout</h2><p>Complete your order</p></div>
-            <div class="modal-body">
-                <div class="alert" id="checkoutAlert"></div>
-                <div class="checkout-grid">
-                    <div class="checkout-form">
-                        <div class="checkout-section">
-                            <h3><span class="step-number">1</span> Billing Cycle</h3>
-                            <div class="billing-cycle" id="billingCycle"></div>
-                        </div>
-
-                        <div class="checkout-section">
-                            <h3><span class="step-number">2</span> Server Location</h3>
-                            <div id="locationSelector" class="location-grid">
-                                </div>
-                        </div>
-
-                        <div class="checkout-section">
-                            <h3><span class="step-number">3</span> Account Information</h3>
-                            <div class="form-row">
-                                <div class="form-group"><label>First Name</label><input type="text" id="checkoutFirstName" class="form-input" placeholder="John" required></div>
-                                <div class="form-group"><label>Last Name</label><input type="text" id="checkoutLastName" class="form-input" placeholder="Doe" required></div>
-                            </div>
-                            <div class="form-group"><label>Email</label><input type="email" id="checkoutEmail" class="form-input" placeholder="you@example.com" required></div>
-                            <div class="form-group"><label>Server Name (optional)</label><input type="text" id="checkoutServerName" class="form-input" placeholder="My Awesome Server"></div>
-                        </div>
-
-                        <div class="checkout-section">
-                            <h3><span class="step-number">4</span> Payment Method</h3>
-                            <div class="payment-methods">
-                                <div class="payment-method selected" onclick="selectPayment('card')"><span class="payment-icon">💳</span>Credit Card</div>
-                                <div class="payment-method" onclick="selectPayment('paypal')"><span class="payment-icon">🅿️</span>PayPal</div>
-                            </div>
-                            <div id="cardPaymentFields">
-                                <div class="form-group">
-                                    <label>Card Number</label>
-                                    <div class="card-input-group">
-                                        <input type="text" id="checkoutCardNumber" class="form-input" placeholder="1234 5678 9012 3456" maxlength="19" required>
-                                        <span class="card-icons">💳</span>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group"><label>Expiry Date</label><input type="text" id="checkoutExpiry" class="form-input" placeholder="MM/YY" maxlength="5" required></div>
-                                    <div class="form-group"><label>CVV</label><input type="text" id="checkoutCVV" class="form-input" placeholder="123" maxlength="4" required></div>
-                                </div>
-                                <div class="form-group"><label>Name on Card</label><input type="text" id="checkoutCardName" class="form-input" placeholder="JOHN DOE" required></div>
-                            </div>
-                            <div id="paypalPaymentFields" style="display:none;">
-                                <p style="color: var(--text-secondary); text-align: center; padding: 2rem;">You will be redirected to PayPal to complete your payment.</p>
-                            </div>
-                            <div class="secure-badge">🔒 Your payment is secured with 256-bit SSL encryption</div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-checkbox"><input type="checkbox" id="checkoutTerms" required><span>I agree to the <a onclick="showTermsPage()" style="cursor:pointer; color:var(--accent-primary);">Terms of Service</a></span></label>
-                        </div>
-
-                        <button type="button" class="btn btn-primary btn-large form-submit" onclick="processPayment()">Complete Order</button>
-                    </div>
-
-                    <div class="order-summary" id="orderSummary"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="successModal">
-        <div class="modal">
-            <div class="success-content">
-                <div class="success-icon">✓</div>
-                <h2>Order Confirmed!</h2>
-                <p>Your server is being set up. You'll receive an email with login details shortly.</p>
-                <div class="order-details" id="orderDetails"></div>
-                <button class="btn btn-primary btn-large" onclick="closeSuccessModal()">Go to Dashboard</button>
-            </div>
-        </div>
-    </div>
-
-    <main id="mainContent">
+    <div id="mainContent">
         <section class="hero">
-            <div class="hero-bg"><div class="hero-grid"></div></div>
-            <div class="hero-container">
+            <div class="container">
                 <div class="hero-content">
-                    <h1>Host Your <span>Minecraft</span> Server in Seconds</h1>
-                    <p class="hero-description">Premium game hosting with instant setup, powerful hardware, and 24/7 DDoS protection. Your world, your rules.</p>
-                    <div class="hero-cta">
-                        <a href="#pricing" class="btn btn-primary btn-large">View Plans</a>
-                        <a href="https://discord.gg/K8tcDCFe2P" target="_blank" class="btn btn-secondary btn-large">Contact Support</a>
-                    </div>
-                    <div class="hero-stats" id="heroStats"></div>
-                </div>
-                <div class="hero-visual">
-                    <div class="minecraft-scene">
-                        <div class="floating-block block-1"></div>
-                        <div class="floating-block block-2"></div>
-                        <div class="floating-block block-3"></div>
-                        <div class="floating-block block-4"></div>
-                        <div class="main-server-visual">
-                            <div class="server-status"><span class="status-dot"></span>Online & Ready</div>
+                    <h1>Host Your <span>Minecraft Server</span> in Seconds</h1>
+                    <p>Premium game hosting with instant setup, powerful hardware, and 24/7 DDoS protection. Your world,
+                        your rules.</p>
+                    <div class="hero-btns"><a href="#pricing" class="btn btn-primary"><i class="fas fa-rocket"></i> View
+                            Plans</a><a href="https://discord.gg/K8tcDCFe2P" class="btn btn-secondary"><i
+                                class="fab fa-discord"></i> Contact Support</a></div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-value">99.9%</div>
+                            <div class="stat-label">Uptime</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">10K+</div>
+                            <div class="stat-label">Servers</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">24/7</div>
+                            <div class="stat-label">Support</div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="features" id="features">
-            <div class="section-container">
-                <div class="section-header animate-on-scroll"><span class="section-tag">Features</span><h2>Everything You Need to Dominate</h2><p>Built for performance, designed for gamers.</p></div>
-                <div class="features-grid" id="featuresGrid"></div>
-            </div>
-        </section>
-
-        <section class="pricing" id="pricing">
-            <div class="section-container">
-                <div class="section-header animate-on-scroll"><span class="section-tag">Pricing</span><h2>Simple, Transparent Pricing</h2><p>No hidden fees. Cancel anytime.</p></div>
-                <div class="pricing-grid" id="pricingGrid"></div>
-            </div>
-        </section>
-
-        <section class="faq" id="faq">
-            <div class="section-container">
-                <div class="section-header animate-on-scroll"><span class="section-tag">FAQ</span><h2>Frequently Asked Questions</h2><p>Got questions? We've got answers.</p></div>
-                <div class="faq-grid" id="faqGrid"></div>
-            </div>
-        </section>
-
-        <section class="cta" id="support">
-            <div class="cta-content animate-on-scroll">
-                <h2>Ready to Start Your Server?</h2>
-                <p>Join thousands of gamers who trust SNAC-Hosting. Get started today!</p>
-                <div class="cta-buttons">
-                    <a href="#pricing" class="btn btn-primary btn-large">View Plans</a>
-                    <a href="https://discord.gg/K8tcDCFe2P" target="_blank" class="btn btn-secondary btn-large">Contact Support</a>
+        <section id="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Everything You Need to Dominate</h2>
+                    <p>Built for performance, designed for gamers.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card glass">
+                        <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                        <h3>Instant Setup</h3>
+                        <p>Your server is ready in seconds with our automated deployment system.</p>
+                    </div>
+                    <div class="feature-card glass">
+                        <div class="feature-icon"><i class="fas fa-shield-halved"></i></div>
+                        <h3>DDoS Protection</h3>
+                        <p>Enterprise-grade protection keeps your server online during attacks.</p>
+                    </div>
+                    <div class="feature-card glass">
+                        <div class="feature-icon"><i class="fas fa-microchip"></i></div>
+                        <h3>Powerful Hardware</h3>
+                        <p>Latest AMD Ryzen processors and NVMe SSDs for maximum performance.</p>
+                    </div>
+                    <div class="feature-card glass">
+                        <div class="feature-icon"><i class="fas fa-globe"></i></div>
+                        <h3>Global Locations</h3>
+                        <p>Multiple server locations worldwide for low latency gameplay.</p>
+                    </div>
+                    <div class="feature-card glass">
+                        <div class="feature-icon"><i class="fas fa-cloud-arrow-up"></i></div>
+                        <h3>Auto Backups</h3>
+                        <p>Daily automated backups with one-click restore functionality.</p>
+                    </div>
+                    <div class="feature-card glass">
+                        <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                        <h3>24/7 Support</h3>
+                        <p>Expert support team available around the clock via Discord.</p>
+                    </div>
                 </div>
             </div>
         </section>
-    </main>
 
-    <section id="termsPage">
-        <div class="terms-container">
-            <a onclick="showHomePage()" class="back-link">← Back to Home</a>
-            <div class="terms-header">
-                <h1>Terms of <span>Service</span></h1>
-                <p class="last-updated">Last Updated: February 2026</p>
+        <section id="pricing">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Simple, Transparent Pricing</h2>
+                    <p>No hidden fees. Cancel anytime. Powered by AMD EPYC™ 9645 processors.</p>
+                </div>
+                <div class="pricing-grid">
+                    <!-- RS 1000 G12 -->
+                    <div class="pricing-card glass">
+                        <div class="pricing-header">
+                            <h3>RS 1000 G12</h3>
+                            <p class="plan-subtitle">Perfect for small SMPs</p>
+                            <div class="price">$11.99<span>/month</span></div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> 8GB DDR5 RAM</li>
+                            <li><i class="fas fa-check"></i> 4 Dedicated Cores</li>
+                            <li><i class="fas fa-check"></i> 256 GB NVMe</li>
+                            <li><i class="fas fa-check"></i> AMD EPYC™ 9645</li>
+                            <li><i class="fas fa-check"></i> DDoS Protection</li>
+                            <li><i class="fas fa-check"></i> 25+ Players</li>
+                            <li><i class="fas fa-check"></i> 40+ Plugins</li>
+                        </ul>
+                        <button class="btn btn-secondary" onclick="selectPlan('RS 1000 G12', 11.99, '8GB DDR5')">Get
+                            Started</button>
+                    </div>
+
+                    <!-- RS 2000 G12 - POPULAR -->
+                    <div class="pricing-card glass popular">
+                        <div class="pricing-header">
+                            <h3>RS 2000 G12</h3>
+                            <p class="plan-subtitle">Fit for growing communities</p>
+                            <div class="price">$19.99<span>/month</span></div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> 16GB DDR5 RAM</li>
+                            <li><i class="fas fa-check"></i> 8 Dedicated Cores</li>
+                            <li><i class="fas fa-check"></i> 512 GB NVMe</li>
+                            <li><i class="fas fa-check"></i> AMD EPYC™ 9645</li>
+                            <li><i class="fas fa-check"></i> Upgraded DDoS Protection</li>
+                            <li><i class="fas fa-check"></i> 30+ Players</li>
+                            <li><i class="fas fa-check"></i> 60+ Plugins</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="selectPlan('RS 2000 G12', 19.99, '16GB DDR5')">Get
+                            Started</button>
+                    </div>
+
+                    <!-- RS 4000 G12 -->
+                    <div class="pricing-card glass">
+                        <div class="pricing-header">
+                            <h3>RS 4000 G12</h3>
+                            <p class="plan-subtitle">Suits big servers</p>
+                            <div class="price">$39.99<span>/month</span></div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> 32GB DDR5 RAM</li>
+                            <li><i class="fas fa-check"></i> 12 Dedicated Cores</li>
+                            <li><i class="fas fa-check"></i> 1TB NVMe</li>
+                            <li><i class="fas fa-check"></i> AMD EPYC™ 9645</li>
+                            <li><i class="fas fa-check"></i> Better Performance</li>
+                            <li><i class="fas fa-check"></i> 40-50 Players</li>
+                            <li><i class="fas fa-check"></i> 50+ Plugins</li>
+                        </ul>
+                        <button class="btn btn-secondary" onclick="selectPlan('RS 4000 G12', 39.99, '32GB DDR5')">Get
+                            Started</button>
+                    </div>
+
+                    <!-- RS 8000 G12 - POPULAR -->
+                    <div class="pricing-card glass popular">
+                        <div class="pricing-header">
+                            <h3>RS 8000 G12</h3>
+                            <p class="plan-subtitle">Perfect for large servers</p>
+                            <div class="price">$64.99<span>/month</span></div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> 64GB DDR5 RAM</li>
+                            <li><i class="fas fa-check"></i> 16 Dedicated Cores</li>
+                            <li><i class="fas fa-check"></i> 2 TB NVMe</li>
+                            <li><i class="fas fa-check"></i> AMD EPYC™ 9645</li>
+                            <li><i class="fas fa-check"></i> Upgraded Security + DDoS</li>
+                            <li><i class="fas fa-check"></i> 50-100 Players</li>
+                            <li><i class="fas fa-check"></i> Unlimited Plugins</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="selectPlan('RS 8000 G12', 64.99, '64GB DDR5')">Get
+                            Started</button>
+                    </div>
+
+                    <!-- RS 12000 G12 -->
+                    <div class="pricing-card glass ultimate">
+                        <div class="pricing-header">
+                            <h3>RS 12000 G12</h3>
+                            <p class="plan-subtitle">Top tier performance, best for massive servers</p>
+                            <div class="price">$99.99<span>/month</span></div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> 96GB DDR5 RAM</li>
+                            <li><i class="fas fa-check"></i> 20 Dedicated Cores</li>
+                            <li><i class="fas fa-check"></i> 3 TB NVMe</li>
+                            <li><i class="fas fa-check"></i> AMD EPYC™ 9645</li>
+                            <li><i class="fas fa-check"></i> Maximum Security + DDoS</li>
+                            <li><i class="fas fa-check"></i> Unlimited Players</li>
+                            <li><i class="fas fa-check"></i> Unlimited Plugins</li>
+                        </ul>
+                        <button class="btn btn-secondary" onclick="selectPlan('RS 12000 G12', 99.99, '96GB DDR5')">Get
+                            Started</button>
+                    </div>
+                </div>
             </div>
-            <div class="terms-content">
-                <h2>1. Acceptance of Terms</h2>
-                <p>By accessing and using services provided by SNAC-Hosting, you accept and agree to be bound by the terms and provision of this agreement.</p>
+        </section>
 
-                <h2>2. Service Availability</h2>
-                <p>We strive to maintain 99.9% uptime. However, periodic maintenance or unforeseen circumstances may cause temporary interruptions.</p>
 
-                <h2>3. Refunds & Cancellations</h2>
-                <p>We offer a 48-hour money-back guarantee if the service does not meet the specified performance metrics. Abuse of this policy may result in a ban.</p>
+        <section id="faq">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Frequently Asked Questions</h2>
+                    <p>Got questions? We've got answers.</p>
+                </div>
+                <div class="faq-container">
+                    <div class="faq-item glass">
+                        <div class="faq-question" onclick="toggleFaq(this)"><span>How fast is the server setup?</span><i
+                                class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer">
+                            <p>Your server is ready instantly! Our automated system deploys your Minecraft server within
+                                seconds of payment confirmation.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item glass">
+                        <div class="faq-question" onclick="toggleFaq(this)"><span>Can I upgrade my plan later?</span><i
+                                class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer">
+                            <p>Yes! You can upgrade or downgrade your plan anytime from your control panel. Changes take
+                                effect immediately.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item glass">
+                        <div class="faq-question" onclick="toggleFaq(this)"><span>Do you support modpacks?</span><i
+                                class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer">
+                            <p>Absolutely! We support all major modpacks including Forge, Fabric, and popular modpack
+                                launchers.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item glass">
+                        <div class="faq-question" onclick="toggleFaq(this)"><span>What's your refund policy?</span><i
+                                class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer">
+                            <p>We offer a 48-hour money-back guarantee if the service doesn't meet your expectations.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                <h2>4. Prohibited Content</h2>
-                <p>You may not use our servers for illegal activities, crypto mining, or massive network attacks (DDoS). Violation of this rule results in immediate termination.</p>
-                
-                <h2>5. Limitation of Liability</h2>
-                <p>SNAC-Hosting is not responsible for data loss. Users are responsible for maintaining their own off-site backups.</p>
+        <section>
+            <div class="container">
+                <div class="cta-section glass">
+                    <h2>Ready to Start Your Server?</h2>
+                    <p>Join thousands of gamers who trust SNAC-Hosting. Get started today!</p>
+                    <div class="cta-btns"><a href="#pricing" class="btn btn-primary"><i class="fas fa-rocket"></i> View
+                            Plans</a><a href="https://discord.gg/K8tcDCFe2P" class="btn btn-secondary"><i
+                                class="fab fa-discord"></i> Contact Support</a></div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-brand"><a href="#" class="logo">SNAC-Hosting</a>
+                        <p>Premium Minecraft server hosting with instant setup and unbeatable support.</p>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Product</h4><a href="#features">Features</a><a href="#pricing">Pricing</a><a
+                            href="#">Status</a>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Support</h4><a href="https://discord.gg/K8tcDCFe2P">Contact Us</a><a
+                            href="https://discord.gg/K8tcDCFe2P">Discord</a>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Company</h4><a href="#">About</a><a href="#"
+                            onclick="openModal('termsModal');return false;">Terms</a>
+                    </div>
+                </div>
+                <div class="footer-bottom">© 2026 SNAC-Hosting. All rights reserved.</div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal"><button class="modal-close" onclick="closeModal('loginModal')"><i
+                    class="fas fa-times"></i></button>
+            <div class="modal-header">
+                <h2>Welcome Back</h2>
+                <p>Sign in to your account</p>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group"><label>Email</label><input type="email" id="loginEmail" required
+                            placeholder="you@example.com"></div>
+                    <div class="form-group"><label>Password</label><input type="password" id="loginPassword" required
+                            placeholder="••••••••"></div><button type="submit" class="btn btn-primary"
+                        style="width:100%">Sign In</button>
+                </form>
+                <p class="form-footer">Don't have an account? <a href="#"
+                        onclick="switchModal('loginModal','registerModal')">Sign up</a></p>
             </div>
         </div>
-    </section>
+    </div>
 
-    <footer>
-        <div class="footer-container">
-            <div class="footer-top">
-                <div class="footer-brand">
-                    <a onclick="showHomePage()" class="logo" style="cursor: pointer;"><div class="logo-icon">S</div><span class="logo-text">SNAC<span>-Hosting</span></span></a>
-                    <p>Premium Minecraft server hosting with instant setup and unbeatable support.</p>
-                </div>
-                <div class="footer-column">
-                    <h4>Product</h4>
-                    <ul>
-                        <li><a href="#features" onclick="showHomePage()">Features</a></li>
-                        <li><a href="#pricing" onclick="showHomePage()">Pricing</a></li>
-                        <li><a href="#">Status</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Support</h4>
-                    <ul>
-                        <li><a href="https://discord.gg/K8tcDCFe2P" target="_blank">Contact Us</a></li>
-                        <li><a href="https://discord.gg/K8tcDCFe2P" target="_blank">Discord</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="#">About</a></li>
-                        <li><a onclick="showTermsPage()" style="cursor: pointer;">Terms</a></li>
-                        <li><a href="#">Careers</a></li>
-                    </ul>
-                </div>
+    <!-- Register Modal -->
+    <div class="modal-overlay" id="registerModal">
+        <div class="modal"><button class="modal-close" onclick="closeModal('registerModal')"><i
+                    class="fas fa-times"></i></button>
+            <div class="modal-header">
+                <h2>Create Account</h2>
+                <p>Start hosting your Minecraft server</p>
             </div>
-            <div class="footer-bottom">
-                <p>© 2026 SNAC-Hosting. All rights reserved.</p>
+            <div class="modal-body">
+                <form onsubmit="handleRegister(event)">
+                    <div class="form-row">
+                        <div class="form-group"><label>First Name</label><input type="text" id="regFirst" required>
+                        </div>
+                        <div class="form-group"><label>Last Name</label><input type="text" id="regLast" required></div>
+                    </div>
+                    <div class="form-group"><label>Email</label><input type="email" id="regEmail" required
+                            placeholder="you@example.com"></div>
+                    <div class="form-group"><label>Password</label><input type="password" id="regPassword" required
+                            placeholder="Min 8 characters"></div><button type="submit" class="btn btn-primary"
+                        style="width:100%">Create Account</button>
+                </form>
+                <p class="form-footer">Already have an account? <a href="#"
+                        onclick="switchModal('registerModal','loginModal')">Sign in</a></p>
             </div>
         </div>
-    </footer>
+    </div>
 
-    <script>
-        // ============================================
-        // ⚙️ CONFIGURATION & STATE
-        // ============================================
-
-        // 🟢 REAL-TIME COUNTER (Starts at 15)
-        let liveServerCount = parseInt(localStorage.getItem('snac_active_servers')) || 15;
-
-        // 🟢 LOCATIONS 
-        const LOCATIONS = [
-            { id: 'eu', name: 'Europe (No Preference)', flag: '🇪🇺', price: 0 },
-            { id: 'us', name: 'Manassas, USA', flag: '🇺🇸', price: 1.57 },
-            { id: 'at', name: 'Vienna, Austria', flag: '🇦🇹', price: 1.57 },
-            { id: 'sg', name: 'Singapore', flag: '🇸🇬', price: 13.20 },
-            { id: 'de', name: 'Nuremberg, Germany', flag: '🇩🇪', price: 1.57 }
-        ];
-
-        let selectedLocationPrice = 0;
-        let selectedLocationName = "Europe";
-
-        const CONFIG = {
-            siteName: "SNAC-Hosting",
-            siteTagline: "Premium Minecraft Server Hosting",
-            serverIP: "play.snac-hosting.com",
-
-            stats: {
-                servers: liveServerCount, 
-                uptime: "99.9",
-                support: "24/7"
-            },
-
-            // 🟢 ORIGINAL PLANS RESTORED (USD + Custom Perks)
-            plans: [
-                {
-                    id: "rs1000",
-                    name: "RS 1000 G12",
-                    description: "Perfect for small SMPs",
-                    price: 11.99,
-                    period: "/month",
-                    popular: false,
-                    buttonText: "Get Started",
-                    buttonStyle: "secondary",
-                    features: ["8GB DDR5 RAM", "4 DEDICATED CORES", "256 GB NVMe", "AMD EPYC™ 9645", "DDOS PROTECTION", "25+ PLAYERS", "40+ PLUGINS"]
-                },
-                {
-                    id: "rs2000",
-                    name: "RS 2000 G12",
-                    description: "Fit for growing communites",
-                    price: 19.99,
-                    period: "/month",
-                    popular: true,
-                    buttonText: "Get Started",
-                    buttonStyle: "primary",
-                    features: ["16GB DDR5 RAM", "8 DEDICATED CORES", "512 GB NVMe", "AMD EPYC™ 9645", "UPGRADED DDOS PROTECTION", "30+ PLAYERS","60+ PLUGINS"]
-                },
-                {
-                    id: "rs4000",
-                    name: "RS 4000 G12",
-                    description: "Suits big servers",
-                    price: 39.99,
-                    period: "/month",
-                    popular: false,
-                    buttonText: "Get Started",
-                    buttonStyle: "secondary",
-                    features: ["32GB DDR5 RAM", "12 DEDICATED CORES", "1 TB NVMe", "AMD EPYC™ 9645", "Better performance", "40-50 PLAYERS", "50+ PLUGINS"]
-                },
-                {
-                    id: "rs8000",
-                    name: "RS 8000 G12",
-                    description: "Perfect for large servers",
-                    price: 64.99,
-                    period: "/month",
-                    popular: true,
-                    buttonText: "Get Started",
-                    buttonStyle: "primary",
-                    features: ["64GB DDR5 RAM", "16 DEDICATED CORES", "2 TB NVMe", "AMD EPYC™ 9645", "UPGRADED SECURITY + DDOS", "50-100 PLAYERS", "UNLIMITED"]
-                },
-                {
-                    id: "rs12000",
-                    name: "RS 12000 G12",
-                    description: "Top tier performance, best for massive servers",
-                    price: 99.99,
-                    period: "/month",
-                    popular: false,
-                    buttonText: "Get Started",
-                    buttonStyle: "secondary",
-                    features: ["96GB DDR5 RAM", "20 DEDICATED CORES", "3 TB NVMe", "AMD EPYC™ 9645", "MAXIMUM SECURITY + DDOS", "UNLIMITED PLAYERS", "UNLIMITED PLUGINS"]
-                }
-            ],
-
-            features: [
-                { icon: "⚡", title: "Instant Setup", description: "Your server is ready in under 60 seconds. No complex configuration needed." },
-                { icon: "🛡️", title: "DDoS Protection", description: "Enterprise grade protection keeps your server online even during attacks." },
-                { icon: "🚀", title: "NVMe Storage", description: "Lightning-fast SSD storage for instant world loading and zero lag." },
-                { icon: "🎮", title: "One-Click Modpacks", description: "Install Forge, Fabric, Spigot, Paper, and 100+ modpacks instantly." },
-                { icon: "📊", title: "Real-time Console", description: "Full access to your server console with live stats and metrics." },
-                { icon: "💾", title: "Auto Backups", description: "Automatic daily backups with one-click restore. Never lose progress." },
-                { icon: "🌐", title: "Global Network", description: "Servers worldwide for the lowest ping no matter where you play." },
-                { icon: "🔧", title: "Full FTP Access", description: "Complete control over your files. Upload plugins, mods easily." }
-            ],
-
-            faq: [
-                { question: "How quickly can I get my server running?", answer: "Your server is deployed instantly after payment. Within 60 seconds, you'll have full access to your control panel and can start playing right away." },
-                { question: "Can I install mods and plugins?", answer: "Absolutely! We support all major mod loaders including Forge, Fabric, Spigot, Paper, and Bukkit. Install mods with one click or upload your own." },
-                { question: "What's your uptime guarantee?", answer: "We guarantee 99.9% uptime backed by our SLA. Our infrastructure runs on enterprise-grade hardware with automatic failover." },
-                { question: "Can I upgrade my plan later?", answer: "Yes! Upgrade or downgrade anytime with zero downtime. Your world data transfers automatically." },
-                { question: "Can I get a custom domain?", answer: "Yes! You can, we suggest buying a domain from Cheapname as it is affordable." }
-            ]
-        };
-
-        // 🛒 CART SYSTEM
-        const Cart = {
-            items: [],
-            
-            add(planId) {
-                const plan = CONFIG.plans.find(p => p.id === planId);
-                if (plan && !this.items.find(i => i.id === planId)) {
-                    this.items = [{ ...plan, quantity: 1, billingCycle: 'monthly' }]; 
-                    this.save();
-                    selectedLocationPrice = 0;
-                    selectedLocationName = "Europe";
-                    this.updateUI();
-                }
-            },
-            
-            remove(planId) {
-                this.items = this.items.filter(i => i.id !== planId);
-                this.save();
-                this.updateUI();
-            },
-            
-            clear() {
-                this.items = [];
-                this.save();
-                this.updateUI();
-            },
-            
-            setBillingCycle(cycle) {
-                if (this.items.length > 0) {
-                    this.items[0].billingCycle = cycle;
-                    this.save();
-                }
-            },
-            
-            getTotal() {
-                if (this.items.length === 0) return 0;
-                const item = this.items[0];
-                let price = item.price;
-                if (item.billingCycle === 'quarterly') price = item.price * 3 * 0.9;
-                if (item.billingCycle === 'yearly') price = item.price * 12 * 0.8;
-                
-                // Add Location Price (Monthly * Months)
-                let multiplier = 1;
-                if (item.billingCycle === 'quarterly') multiplier = 3;
-                if (item.billingCycle === 'yearly') multiplier = 12;
-                
-                return price + (selectedLocationPrice * multiplier);
-            },
-            
-            save() {
-                localStorage.setItem('snac_cart', JSON.stringify(this.items));
-            },
-            
-            load() {
-                const saved = localStorage.getItem('snac_cart');
-                if (saved) this.items = JSON.parse(saved);
-                this.updateUI();
-            },
-            
-            updateUI() {
-                const badge = document.querySelector('.cart-badge');
-                if (badge) {
-                    badge.textContent = this.items.length;
-                    badge.classList.toggle('visible', this.items.length > 0);
-                }
-            }
-        };
-
-        // 🔐 AUTH SYSTEM
-        const Auth = {
-            getUsers() { return JSON.parse(localStorage.getItem('snac_users') || '[]'); },
-            saveUsers(users) { localStorage.setItem('snac_users', JSON.stringify(users)); },
-            getCurrentUser() {
-                const userId = localStorage.getItem('snac_current_user');
-                if (!userId) return null;
-                return this.getUsers().find(u => u.id === userId) || null;
-            },
-            register(email, password, name) {
-                const users = this.getUsers();
-                if (users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
-                    return { success: false, message: 'An account with this email already exists.' };
-                }
-                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                    return { success: false, message: 'Please enter a valid email address.' };
-                }
-                if (password.length < 6) {
-                    return { success: false, message: 'Password must be at least 6 characters.' };
-                }
-                const newUser = { id: 'user_' + Date.now(), email: email.toLowerCase(), password: this.hash(password), name: name || email.split('@')[0], createdAt: new Date().toISOString() };
-                users.push(newUser);
-                this.saveUsers(users);
-                return { success: true, message: 'Account created successfully!', user: newUser };
-            },
-            login(email, password) {
-                const user = this.getUsers().find(u => u.email.toLowerCase() === email.toLowerCase());
-                if (!user) return { success: false, message: 'No account found with this email.' };
-                if (user.password !== this.hash(password)) return { success: false, message: 'Incorrect password.' };
-                localStorage.setItem('snac_current_user', user.id);
-                return { success: true, message: 'Welcome back!', user };
-            },
-            logout() { localStorage.removeItem('snac_current_user'); },
-            hash(p) { let h = 0; for (let i = 0; i < p.length; i++) { h = ((h << 5) - h) + p.charCodeAt(i); h = h & h; } return 'h_' + Math.abs(h).toString(16); }
-        };
-
-        // UI RENDER FUNCTIONS
-        let selectedPaymentMethod = 'card';
-        let selectedBillingCycle = 'monthly';
-
-        function renderStats() {
-            const s = CONFIG.stats;
-            document.getElementById('heroStats').innerHTML = `
-                <div class="stat"><div class="stat-value" id="stat-servers">${liveServerCount}<span>+</span></div><div class="stat-label">Active Servers</div></div>
-                <div class="stat"><div class="stat-value">${s.uptime}<span>%</span></div><div class="stat-label">Uptime SLA</div></div>
-                <div class="stat"><div class="stat-value">${s.support.replace('/', '<span>/')}</span></div><div class="stat-label">Support</div></div>
-            `;
-        }
-
-        function renderFeatures() {
-            document.getElementById('featuresGrid').innerHTML = CONFIG.features.map(f => `
-                <div class="feature-card animate-on-scroll">
-                    <div class="feature-icon">${f.icon}</div>
-                    <h3>${f.title}</h3>
-                    <p>${f.description}</p>
-                </div>
-            `).join('');
-        }
-
-        function renderPricing() {
-            document.getElementById('pricingGrid').innerHTML = CONFIG.plans.map(p => `
-                <div class="pricing-card ${p.popular ? 'popular' : ''} animate-on-scroll">
-                    ${p.popular ? '<span class="popular-badge">Most Popular</span>' : ''}
-                    <div class="plan-name">${p.name}</div>
-                    <div class="plan-description">${p.description}</div>
-                    <div class="plan-price"><span class="price">$${p.price.toFixed(2)}</span><span class="price-period">${p.period}</span></div>
-                    <ul class="plan-features">${p.features.map(f => `<li><span class="check">✓</span>${f}</li>`).join('')}</ul>
-                    <button class="btn btn-${p.buttonStyle}" onclick="handlePlanSelect('${p.id}')">${p.buttonText}</button>
-                </div>
-            `).join('');
-        }
-
-        function renderFAQ() {
-            document.getElementById('faqGrid').innerHTML = CONFIG.faq.map(f => `
-                <div class="faq-item animate-on-scroll">
-                    <button class="faq-question" onclick="toggleFAQ(this)">${f.question}<span class="faq-icon"></span></button>
-                    <div class="faq-answer"><div class="faq-answer-content">${f.answer}</div></div>
-                </div>
-            `).join('');
-        }
-
-        function renderAuthButtons() {
-            const user = Auth.getCurrentUser();
-            const nav = document.getElementById('navButtons');
-            const mob = document.getElementById('mobileAuthButtons');
-            
-            const cartIcon = `<div class="cart-icon" onclick="openCheckoutModal()">🛒<span class="cart-badge">${Cart.items.length}</span></div>`;
-            
-            if (user) {
-                const init = user.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
-                nav.innerHTML = `${cartIcon}<div class="user-menu"><div class="user-avatar">${init}</div><div class="user-dropdown"><div class="user-dropdown-header"><strong>${user.name}</strong><span>${user.email}</span></div><a href="#">Dashboard</a><a href="#">My Servers</a><button class="logout-btn" onclick="handleLogout()">Sign Out</button></div></div>`;
-                mob.innerHTML = `<p style="color:var(--text-secondary);margin-bottom:1rem;">Signed in as ${user.name}</p><button class="btn btn-secondary" style="width:100%;" onclick="handleLogout();toggleMobileMenu();">Sign Out</button>`;
-            } else {
-                nav.innerHTML = `${cartIcon}<button class="btn btn-ghost" onclick="openAuthModal('signin')">Sign In</button><button class="btn btn-primary" onclick="openAuthModal('signup')">Get Started</button>`;
-                mob.innerHTML = `<button class="btn btn-ghost" style="width:100%;margin-bottom:1rem;" onclick="openAuthModal('signin');toggleMobileMenu();">Sign In</button><button class="btn btn-primary" style="width:100%;" onclick="openAuthModal('signup');toggleMobileMenu();">Get Started</button>`;
-            }
-            Cart.updateUI();
-        }
-
-        function handlePlanSelect(planId) {
-            Cart.add(planId);
-            openCheckoutModal();
-        }
-
-        function openCheckoutModal() {
-            if (Cart.items.length === 0) {
-                alert('Please select a plan first!');
-                return;
-            }
-            
-            const user = Auth.getCurrentUser();
-            if (user) {
-                document.getElementById('checkoutFirstName').value = user.name.split(' ')[0] || '';
-                document.getElementById('checkoutLastName').value = user.name.split(' ')[1] || '';
-                document.getElementById('checkoutEmail').value = user.email;
-            }
-            
-            renderBillingCycle();
-            renderLocationSelector(); 
-            renderOrderSummary();
-            document.getElementById('checkoutModal').classList.add('active');
-        }
-
-        function closeCheckoutModal() {
-            document.getElementById('checkoutModal').classList.remove('active');
-        }
-
-        // 🟢 DYNAMIC LOCATION SELECTOR
-        function renderLocationSelector() {
-            const item = Cart.items[0];
-            const container = document.getElementById('locationSelector');
-            container.innerHTML = ''; 
-
-            // Logic: Only RS1000 and RS2000 get choices
-            if (item.id === 'rs1000' || item.id === 'rs2000') {
-                LOCATIONS.forEach(loc => {
-                    const el = document.createElement('div');
-                    el.className = `location-option ${selectedLocationName === loc.name ? 'selected' : ''}`;
-                    el.onclick = () => selectLocation(loc);
-                    
-                    const extra = loc.price > 0 ? `+$${loc.price.toFixed(2)}` : 'Included';
-                    
-                    el.innerHTML = `
-                        <span class="location-flag">${loc.flag}</span>
-                        <span class="location-name">${loc.id === 'eu' ? 'Europe' : loc.name.split(',')[0]}</span>
-                        <span class="location-price ${loc.price > 0 ? 'extra' : ''}">${extra}</span>
-                    `;
-                    container.appendChild(el);
-                });
-            } else {
-                // RS4000+ Logic (Locked)
-                selectedLocationPrice = 0;
-                selectedLocationName = "Europe (No Preference)";
-                container.innerHTML = `
-                    <div class="location-option selected" style="cursor: default; width: 100%;">
-                        <span class="location-flag">🇪🇺</span>
-                        <span class="location-name">No Preference Europe</span>
-                        <span class="location-price">Included</span>
-                        <span class="coming-soon-text">More locations coming soon...</span>
-                    </div>
-                `;
-            }
-        }
-
-        function selectLocation(loc) {
-            selectedLocationPrice = loc.price;
-            selectedLocationName = loc.name;
-            renderLocationSelector();
-            renderOrderSummary(); 
-        }
-
-        function renderBillingCycle() {
-            const item = Cart.items[0];
-            if (!item) return;
-            
-            const monthly = item.price;
-            const quarterly = (item.price * 3 * 0.9).toFixed(2);
-            const yearly = (item.price * 12 * 0.8).toFixed(2);
-            
-            document.getElementById('billingCycle').innerHTML = `
-                <div class="billing-option ${selectedBillingCycle === 'monthly' ? 'selected' : ''}" onclick="selectBillingCycle('monthly')">
-                    <span class="billing-period">Monthly</span>
-                    <span class="billing-price">$${monthly.toFixed(2)}/mo</span>
-                </div>
-                <div class="billing-option ${selectedBillingCycle === 'quarterly' ? 'selected' : ''}" onclick="selectBillingCycle('quarterly')">
-                    <span class="billing-period">Quarterly</span>
-                    <span class="billing-price">$${quarterly}/3mo</span>
-                    <span class="billing-save">Save 10%</span>
-                </div>
-                <div class="billing-option ${selectedBillingCycle === 'yearly' ? 'selected' : ''}" onclick="selectBillingCycle('yearly')">
-                    <span class="billing-period">Yearly</span>
-                    <span class="billing-price">$${yearly}/yr</span>
-                    <span class="billing-save">Save 20%</span>
-                </div>
-            `;
-        }
-
-        function selectBillingCycle(cycle) {
-            selectedBillingCycle = cycle;
-            Cart.setBillingCycle(cycle);
-            renderBillingCycle();
-            renderOrderSummary();
-        }
-
-        function renderOrderSummary() {
-            const item = Cart.items[0];
-            if (!item) return;
-            
-            const total = Cart.getTotal();
-            const cycleText = selectedBillingCycle === 'monthly' ? '/month' : selectedBillingCycle === 'quarterly' ? '/3 months' : '/year';
-            
-            document.getElementById('orderSummary').innerHTML = `
-                <h3>Order Summary</h3>
-                <div class="order-item">
-                    <div class="order-item-info">
-                        <h4>${item.name}</h4>
-                        <p>${item.description}</p>
-                    </div>
-                    <div class="order-item-price">$${item.price.toFixed(2)}</div>
-                </div>
-                <div class="order-item">
-                    <div class="order-item-info">
-                        <h4>Location</h4>
-                        <p>${selectedLocationName}</p>
-                    </div>
-                    <div class="order-item-price">${selectedLocationPrice > 0 ? '+$' + selectedLocationPrice.toFixed(2) : '$0.00'}</div>
-                </div>
-                <div class="order-total">
-                    <span>Total ${cycleText}</span>
-                    <span class="total-price">$${total.toFixed(2)}</span>
-                </div>
-                <div class="order-features">
-                    <h4>Includes:</h4>
-                    <ul>
-                        ${item.features.map(f => `<li>${f}</li>`).join('')}
-                    </ul>
-                </div>
-            `;
-        }
-
-        function selectPayment(method) {
-            selectedPaymentMethod = method;
-            document.querySelectorAll('.payment-method').forEach(el => el.classList.remove('selected'));
-            event.currentTarget.classList.add('selected');
-            
-            document.getElementById('cardPaymentFields').style.display = method === 'card' ? 'block' : 'none';
-            document.getElementById('paypalPaymentFields').style.display = method === 'paypal' ? 'block' : 'none';
-        }
-
-        function processPayment() {
-            const firstName = document.getElementById('checkoutFirstName').value;
-            const lastName = document.getElementById('checkoutLastName').value;
-            const email = document.getElementById('checkoutEmail').value;
-            const terms = document.getElementById('checkoutTerms').checked;
-            
-            if (!firstName || !lastName || !email) {
-                showCheckoutAlert('Please fill in all required fields.', 'error');
-                return;
-            }
-            
-            if (!terms) {
-                showCheckoutAlert('Please agree to the Terms of Service.', 'error');
-                return;
-            }
-            
-            if (selectedPaymentMethod === 'card') {
-                const cardNumber = document.getElementById('checkoutCardNumber').value;
-                const expiry = document.getElementById('checkoutExpiry').value;
-                const cvv = document.getElementById('checkoutCVV').value;
-                
-                if (!cardNumber || !expiry || !cvv) {
-                    showCheckoutAlert('Please fill in all payment details.', 'error');
-                    return;
-                }
-            }
-            
-            // Simulate payment processing
-            const btn = event.target;
-            btn.textContent = 'Processing...';
-            btn.disabled = true;
-            
-            setTimeout(() => {
-                // 🟢 INCREMENT SERVERS HERE
-                liveServerCount++;
-                localStorage.setItem('snac_active_servers', liveServerCount); // Save to browser
-                renderStats(); // Update the UI instantly
-                
-                closeCheckoutModal();
-                showSuccessModal();
-                Cart.clear();
-                renderAuthButtons();
-                btn.textContent = 'Complete Order';
-                btn.disabled = false;
-            }, 2000);
-        }
-
-        function showCheckoutAlert(message, type) {
-            const alert = document.getElementById('checkoutAlert');
-            alert.textContent = message;
-            alert.className = `alert ${type} visible`;
-            setTimeout(() => alert.className = 'alert', 5000);
-        }
-
-        function showSuccessModal() {
-            const item = Cart.items[0];
-            const total = Cart.getTotal();
-            const orderId = 'ORD-' + Date.now().toString(36).toUpperCase();
-            
-            document.getElementById('orderDetails').innerHTML = `
-                <h4>Order Details</h4>
-                <div class="order-detail-row"><span>Order ID</span><span>${orderId}</span></div>
-                <div class="order-detail-row"><span>Plan</span><span>${item?.name || 'N/A'}</span></div>
-                <div class="order-detail-row"><span>Location</span><span>${selectedLocationName}</span></div>
-                <div class="order-detail-row"><span>Billing</span><span>${selectedBillingCycle.charAt(0).toUpperCase() + selectedBillingCycle.slice(1)}</span></div>
-                <div class="order-detail-row"><span>Total</span><span style="color: var(--accent-primary);">$${total.toFixed(2)}</span></div>
-            `;
-            
-            document.getElementById('successModal').classList.add('active');
-        }
-
-        function closeSuccessModal() {
-            document.getElementById('successModal').classList.remove('active');
-        }
-
-        function openAuthModal(mode) {
-            document.getElementById('authModal').classList.add('active');
-            mode === 'signup' ? showSignUp() : showSignIn();
-            clearAlerts();
-        }
-
-        function closeAuthModal() {
-            document.getElementById('authModal').classList.remove('active');
-            clearAlerts();
-        }
-
-        function showSignIn() {
-            document.getElementById('signInForm').style.display = 'block';
-            document.getElementById('signUpForm').style.display = 'none';
-        }
-
-        function showSignUp() {
-            document.getElementById('signInForm').style.display = 'none';
-            document.getElementById('signUpForm').style.display = 'block';
-        }
-
-        function clearAlerts() {
-            document.querySelectorAll('.alert').forEach(el => el.className = 'alert');
-        }
-
-        function showAlert(id, msg, type) {
-            const el = document.getElementById(id);
-            el.textContent = msg;
-            el.className = `alert ${type} visible`;
-        }
-
-        function handleSignIn(e) {
-            e.preventDefault();
-            clearAlerts();
-            const result = Auth.login(document.getElementById('signInEmail').value, document.getElementById('signInPassword').value);
-            if (result.success) {
-                showAlert('signInAlert', result.message, 'success');
-                setTimeout(() => { closeAuthModal(); renderAuthButtons(); }, 1000);
-            } else showAlert('signInAlert', result.message, 'error');
-        }
-
-        function handleSignUp(e) {
-            e.preventDefault();
-            clearAlerts();
-            const name = document.getElementById('signUpName').value;
-            const email = document.getElementById('signUpEmail').value;
-            const password = document.getElementById('signUpPassword').value;
-            const result = Auth.register(email, password, name);
-            if (result.success) {
-                showAlert('signUpAlert', result.message, 'success');
-                Auth.login(email, password);
-                setTimeout(() => { closeAuthModal(); renderAuthButtons(); }, 1500);
-            } else showAlert('signUpAlert', result.message, 'error');
-        }
-
-        function handleLogout() { Auth.logout(); renderAuthButtons(); }
-
-        function togglePassword(id, btn) {
-            const input = document.getElementById(id);
-            input.type = input.type === 'password' ? 'text' : 'password';
-            btn.textContent = input.type === 'password' ? '👁' : '🙈';
-        }
-
-        // 🔄 PAGE NAVIGATION LOGIC
-        function showTermsPage() {
-            closeCheckoutModal();
-            closeAuthModal();
-            document.getElementById('mainContent').style.display = 'none';
-            document.getElementById('termsPage').style.display = 'block';
-            window.scrollTo(0, 0);
-        }
-
-        function showHomePage() {
-            document.getElementById('mainContent').style.display = 'block';
-            document.getElementById('termsPage').style.display = 'none';
-            window.scrollTo(0, 0);
-        }
-
-        window.addEventListener('scroll', () => document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50));
-
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('active');
-            document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
-        }
-
-        function toggleFAQ(button) {
-            const item = button.parentElement;
-            const wasActive = item.classList.contains('active');
-            document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('active'));
-            if (!wasActive) item.classList.add('active');
-        }
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-        document.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href !== '#') {
-                    e.preventDefault();
-                    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // Close modals on overlay click
-        ['authModal', 'checkoutModal', 'successModal'].forEach(id => {
-            document.getElementById(id).addEventListener('click', function(e) {
-                if (e.target === this) {
-                    this.classList.remove('active');
-                }
-            });
-        });
-
-        document.addEventListener('keydown', e => { 
-            if (e.key === 'Escape') {
-                closeAuthModal();
-                closeCheckoutModal();
-                closeSuccessModal();
-            }
-        });
-
-        // Format card number input
-        document.addEventListener('DOMContentLoaded', function() {
-            renderStats();
-            renderFeatures();
-            renderPricing();
-            renderFAQ();
-            renderAuthButtons();
-            Cart.load();
-            
-            document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
-            document.querySelectorAll('.features-grid .feature-card').forEach((c, i) => c.style.transitionDelay = `${i * 0.1}s`);
-            document.querySelectorAll('.pricing-grid .pricing-card').forEach((c, i) => c.style.transitionDelay = `${i * 0.15}s`);
-            document.querySelectorAll('.faq-grid .faq-item').forEach((c, i) => c.style.transitionDelay = `${i * 0.1}s`);
-            
-            // Card number formatting
-            const cardInput = document.getElementById('checkoutCardNumber');
-            if (cardInput) {
-                cardInput.addEventListener('input', function(e) {
-                    let value = e.target.value.replace(/\s/g, '').replace(/\D/g, '');
-                    let formatted = value.match(/.{1,4}/g)?.join(' ') || '';
-                    e.target.value = formatted;
-                });
-            }
-            
-            // Expiry formatting
-            const expiryInput = document.getElementById('checkoutExpiry');
-            if (expiryInput) {
-                expiryInput.addEventListener('input', function(e) {
-                    let value = e.target.value.replace(/\D/g, '');
-                    if (value.length >= 2) {
-                        value = value.slice(0, 2) + '/' + value.slice(2, 4);
-                    }
-                    e.target.value = value;
-                });
-            }
-        });
-    </script>
-</body>
-</html>
+    <!-- Checkout Modal -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal checkout-modal"><button class="modal-close" onclick="closeModal('checkoutModal')"><i
+                    class="fas fa-times"></i></button>
+            <div class="checkout-content">
+                <div class="checkout-steps">
+                    <div class="checkout-step active" data-step="1">
+                        <div class="step-header">
+                            <div class="step-number">1</div>
+                            <h3>Billing Cycle</h3>
+                        </div>
+                        <div class="cycle-grid">
+                            <div class="cycle-option selected" onclick="selectCycle(this,1)" data-mult="1"><i
+                                    class="fas fa-calendar"></i>
+                                <div>Monthly</div><small>No discount</small>
+                            </div>... (67 KB left)
