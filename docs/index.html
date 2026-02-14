@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SNACK-Hosting | Game Server Hosting</title>
+<title>snack-hosting</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
@@ -186,17 +186,17 @@ footer{padding:60px 0 30px;border-top:1px solid var(--border-color)}
 <div class="mobile-nav-overlay" id="mobileNav">
 <button class="mobile-nav-close" onclick="closeMobileMenu()"><i class="fas fa-times"></i></button>
 <a onclick="closeMobileMenu();showPage('home')">Home</a>
-<a href="#features" onclick="closeMobileMenu();showPage('home')">Features</a>
-<a href="#pricing" onclick="closeMobileMenu();showPage('home')">Pricing</a>
-<a onclick="closeMobileMenu();showPage('servers')">Servers</a>
-<a href="#faq" onclick="closeMobileMenu();showPage('home')">FAQ</a>
+<a href="javascript:void(0)" onclick="closeMobileMenu();showPage('home');setTimeout(()=>document.getElementById('features').scrollIntoView({behavior:'smooth'}),100)">Features</a>
+<a href="javascript:void(0)" onclick="closeMobileMenu();showPage('home');setTimeout(()=>document.getElementById('pricing').scrollIntoView({behavior:'smooth'}),100)">Pricing</a>
+<a href="javascript:void(0)" onclick="closeMobileMenu();showPage('servers')">Servers</a>
+<a href="javascript:void(0)" onclick="closeMobileMenu();showPage('home');setTimeout(()=>document.getElementById('faq').scrollIntoView({behavior:'smooth'}),100)">FAQ</a>
 <a href="https://discord.gg/K8tcDCFe2P" target="_blank" onclick="closeMobileMenu()">Support</a>
 <div id="mobileAuthBtns"><button class="btn btn-secondary" onclick="closeMobileMenu();openModal('loginModal')">Login</button> <button class="btn btn-primary" onclick="closeMobileMenu();openModal('registerModal')">Sign Up</button></div>
 <div id="mobileUserBtns" class="hidden" style="text-align:center"><p id="mobileUserName" style="margin-bottom:12px;font-weight:600"></p><button class="btn btn-secondary" onclick="handleLogout()">Logout</button></div>
 </div>
 <nav id="navbar"><div class="container">
-<span class="logo" onclick="showPage('home')">SNACK-Hosting</span>
-<div class="nav-links"><a href="#features" onclick="showPage('home')">Features</a><a href="#pricing" onclick="showPage('home')">Pricing</a><a onclick="showPage('servers')">Servers</a><a href="#faq" onclick="showPage('home')">FAQ</a><a href="https://discord.gg/K8tcDCFe2P" target="_blank">Support</a></div>
+<span class="logo" onclick="showPage('home')">snack-hosting</span>
+<div class="nav-links"><a href="#features" onclick="event.preventDefault();showPage('home');setTimeout(()=>document.getElementById('features').scrollIntoView({behavior:'smooth'}),100)">Features</a><a href="#pricing" onclick="event.preventDefault();showPage('home');setTimeout(()=>document.getElementById('pricing').scrollIntoView({behavior:'smooth'}),100)">Pricing</a><a href="javascript:void(0)" onclick="showPage('servers')">Servers</a><a href="#faq" onclick="event.preventDefault();showPage('home');setTimeout(()=>document.getElementById('faq').scrollIntoView({behavior:'smooth'}),100)">FAQ</a><a href="https://discord.gg/K8tcDCFe2P" target="_blank">Support</a></div>
 <div class="nav-auth" id="navAuth"><button class="btn btn-secondary" onclick="openModal('loginModal')">Login</button><button class="btn btn-primary" onclick="openModal('registerModal')">Sign Up</button></div>
 <div class="nav-user hidden" id="navUser"><div class="nav-user-avatar" id="userAvatar"></div><span id="userName" style="font-weight:600;font-size:14px"></span><button class="btn btn-secondary" onclick="handleLogout()" style="padding:8px 16px;font-size:13px">Logout</button></div>
 <div class="mobile-menu" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
@@ -210,8 +210,8 @@ footer{padding:60px 0 30px;border-top:1px solid var(--border-color)}
 <div class="hero-stats"><div class="stat"><div class="stat-value">99.9%</div><div class="stat-label">Uptime</div></div><div class="stat"><div class="stat-value" id="waitlistStatCount">0</div><div class="stat-label">On Waitlist</div></div><div class="stat"><div class="stat-value">24/7</div><div class="stat-label">Support</div></div></div>
 </div></div></section>
 <section id="waitlist" class="waitlist-section"><div class="container"><div class="waitlist-card">
-<div id="waitlistDefault"><div class="waitlist-icon"><i class="fas fa-rocket"></i></div><h2>Be the First to Know</h2><p>Join our waitlist to get early access and exclusive launch-day discounts when SNACK-Hosting goes live.</p><div class="waitlist-counter"><span class="count-number" id="waitlistCount">0</span><span class="count-label">people already joined</span></div><br><button class="waitlist-btn" onclick="handleJoinWaitlist()"><i class="fas fa-bell"></i> Join the Waitlist</button></div>
-<div class="waitlist-success" id="waitlistSuccess"><div class="check-circle"><i class="fas fa-check"></i></div><h3>You're on the list!</h3><p>We'll notify you at <strong id="waitlistEmail"></strong> as soon as SNACK-Hosting launches.</p><div class="waitlist-position">Your position: <strong id="waitlistPosition">#1</strong></div></div>
+<div id="waitlistDefault"><div class="waitlist-icon"><i class="fas fa-rocket"></i></div><h2>Be the First to Know</h2><p>Join our waitlist to get early access and exclusive launch-day discounts when snack-hosting goes live.</p><div class="waitlist-counter"><span class="count-number" id="waitlistCount">0</span><span class="count-label">people already joined</span></div><br><button class="waitlist-btn" onclick="handleJoinWaitlist()"><i class="fas fa-bell"></i> Join the Waitlist</button></div>
+<div class="waitlist-success" id="waitlistSuccess"><div class="check-circle"><i class="fas fa-check"></i></div><h3>You're on the list!</h3><p>We'll notify you at <strong id="waitlistEmail"></strong> as soon as snack-hosting launches.</p><div class="waitlist-position">Your position: <strong id="waitlistPosition">#1</strong></div></div>
 </div></div></section>
 <section id="features"><div class="container">
 <div class="section-header"><h2>Everything You Need to Dominate</h2><p>Built for performance, designed for gamers.</p></div>
@@ -232,17 +232,17 @@ footer{padding:60px 0 30px;border-top:1px solid var(--border-color)}
 <div class="faq-container" id="faqContainer"></div>
 </div></div></section>
 <section><div class="container"><div class="cta-section glass">
-<h2>Ready to Get Early Access?</h2><p>Join the waitlist and be first in line when SNACK-Hosting launches!</p>
+<h2>Ready to Get Early Access?</h2><p>Join the waitlist and be first in line when snack-hosting launches!</p>
 <div class="cta-btns"><button class="btn btn-primary" onclick="scrollToWaitlist()"><i class="fas fa-bell"></i> Join Waitlist</button><a href="https://discord.gg/K8tcDCFe2P" class="btn btn-secondary"><i class="fab fa-discord"></i> Contact Support</a></div>
 </div></div></section>
 <footer><div class="container">
 <div class="footer-grid">
-<div class="footer-brand"><span class="logo" onclick="showPage('home')">SNACK-Hosting</span><p>Game server hosting with instant setup and unbeatable support. Launching soon.</p></div>
-<div class="footer-links"><h4>Product</h4><a href="#features">Features</a><a href="#pricing">Pricing</a><a onclick="showPage('servers')" style="cursor:pointer">Servers</a></div>
+<div class="footer-brand"><span class="logo" onclick="showPage('home')">snack-hosting</span><p>Game server hosting with instant setup and unbeatable support. Launching soon.</p></div>
+<div class="footer-links"><h4>Product</h4><a href="javascript:void(0)" onclick="showPage('home');setTimeout(()=>document.getElementById('features').scrollIntoView({behavior:'smooth'}),100)">Features</a><a href="javascript:void(0)" onclick="showPage('home');setTimeout(()=>document.getElementById('pricing').scrollIntoView({behavior:'smooth'}),100)">Pricing</a><a href="javascript:void(0)" onclick="showPage('servers')">Servers</a></div>
 <div class="footer-links"><h4>Support</h4><a href="https://discord.gg/K8tcDCFe2P">Contact Us</a><a href="https://discord.gg/K8tcDCFe2P">Discord</a></div>
 <div class="footer-links"><h4>Company</h4><a href="#">About</a><a href="#">Terms</a></div>
 </div>
-<div class="footer-bottom">&copy; 2026 SNACK-Hosting. All rights reserved.</div>
+<div class="footer-bottom">&copy; 2026 snack-hosting. All rights reserved.</div>
 </div></footer>
 </div>
 <div class="page" id="page-servers"><div class="container"><div class="servers-layout">
@@ -281,7 +281,7 @@ footer{padding:60px 0 30px;border-top:1px solid var(--border-color)}
 <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg"></span></div>
 <script>
 // ╔══════════════════════════════════════════════════════════════════╗
-// ║  SNACK-HOSTING SERVER CONFIGURATION                             ║
+// ║  snack-hosting SERVER CONFIGURATION                             ║
 // ║  Edit the servers below to add/remove games per region.         ║
 // ║                                                                  ║
 // ║  FORMAT:                                                         ║
@@ -334,7 +334,7 @@ const PRICING_CONFIG = [
     {
         name: 'RS 1000 G12',
         subtitle: 'Perfect for small SMPs',
-        price: '$12.99',
+        price: '$11.99',
         popular: false,
         ultimate: false,
         buttonStyle: 'secondary',
@@ -440,17 +440,16 @@ const FAQ_CONFIG = [
         answer: 'Absolutely! We support all major modpacks including Forge, Fabric, and popular modpack launchers.',
     },
     {
-        question: 'When does Snack-Hosting launch?',
+        question: 'When does snack-hosting launch?',
         answer: "We're launching in a few months! Join our waitlist to be the first to know and get exclusive launch-day discounts.",
     },
     {
         question: 'What games do you support?',
         answer: "We're launching with Minecraft and Rust server hosting, with more games coming soon!",
     },
-
-        {
-        question: 'Why are the prices too expensive?',
-        answer: "SNACK-Hosting plan runs on dedicated AMD EPYC™ 9645 processors with DDR5 ECC RAM, the fastest server-grade memory available, delivering up to 2x the bandwidth of DDR4.",
+    {
+        question: 'Why are the prices higher than other hosts?',
+        answer: "Unlike budget hosts that cram hundreds of servers onto old hardware, every snack-hosting plan runs on dedicated AMD EPYC™ 9645 processors with DDR5 ECC RAM — the fastest server-grade memory available, delivering up to 2x the bandwidth of DDR4. Combined with enterprise NVMe SSDs that hit 7,000MB/s read speeds, your world loads instantly and chunk generation is buttery smooth even with 50+ players. You're not paying for shared resources — you're getting dedicated cores, true DDoS protection, and hardware that most hosts won't touch because of the cost. The performance difference is night and day.",
     },
 ];
 // ──────────────────────────────────────────────
